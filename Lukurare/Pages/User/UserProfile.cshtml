@@ -1,0 +1,820 @@
+﻿@page
+@model Lukurare.Pages.User.UserProfileModel
+@{
+    Layout = "/Pages/Shared/_UserLayout.cshtml";
+    ViewData["Title"] = "Profile";
+}
+
+<main class="main">
+    <section class="section-box-2">
+        <div class="container">
+            <div class="banner-hero banner-image-single"><img src="/assets/imgs/page/candidates/img.png" alt="Lukurare"><a class="btn-editor" href="#"></a></div>
+            <div class="box-company-profile">
+                <div class="image-compay"><img data-bind="attr: { src: PhotoLinkUrl}" alt="Lukurare" style="width: 100px; height: 100px;"></div>
+                <div class="row mt-10">
+                    <div class="col-lg-8 col-md-12">
+                        <h5 class="f-18" data-bind="text: Brand"><span class="card-location font-regular ml-20" data-bind="text: Location"></span></h5>
+                        @*<p class="mt-0 font-md color-text-paragraph-2 mb-15">UI/UX Designer. Front end Developer</p>*@
+                    </div>
+                    @*<div class="col-lg-4 col-md-12 text-lg-end"><a class='btn btn-preview-icon btn-apply btn-apply-big' href='page-contact.html'>Preview</a></div>*@
+                </div>
+            </div>
+            <div class="border-bottom pt-10 pb-10"></div>
+        </div>
+    </section>
+    <section class="section-box mt-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="box-nav-tabs nav-tavs-profile mb-5">
+                        <ul class="nav" role="tablist">
+                            <li><a class="btn btn-border aboutus-icon mb-20 active" href="#tab-my-profile" data-bs-toggle="tab" role="tab" aria-controls="tab-my-profile" aria-selected="true">My Profile</a></li>
+                            <li><a class="btn btn-border recruitment-icon mb-20" href="#tab-my-jobs" data-bs-toggle="tab" role="tab" aria-controls="tab-my-jobs" aria-selected="false">View Profile</a></li>
+                        </ul>
+                        <div class="border-bottom pt-10 pb-10"></div>                       
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-12 col-12 mb-50">
+                    <div class="content-single">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="tab-my-profile" role="tabpanel" aria-labelledby="tab-my-profile">
+                                <h3 class="mt-0 mb-15 color-brand-1">My Account</h3><a class="font-md color-text-paragraph-2" href="#">Update your profile</a>
+                                <div class="mt-35 mb-40 box-info-profie">
+                                    <div class="image-profile">
+                                        <img data-bind="attr: { src: PhotoLinkUrl}" alt="Lukurare">
+                                    </div>
+                                    <!-- Add an input element of type file and hide it -->
+                                    <input type="file" id="fileInput" style="display: none;">
+                                    <!-- Modify the button to trigger the input element when clicked -->
+                                    <a class="btn btn-apply" id="chooseAndUploadBtn">Upload Avatar</a>
+                                    <!-- <a class="btn btn-link">Delete</a> -->
+                                </div>
+                                <div class="box-content">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="educationalBackgroundCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Educational Background</h5>
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="school">Current School/University</label>
+                                                            <input type="text" class="form-control" id="school" placeholder="Enter your current school or university" data-bind="value: school">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="degree">Degree Program/Diploma/Certificate</label>
+                                                            <input type="text" class="form-control" id="degree" placeholder="Enter your degree program, diploma, or certificate" data-bind="value: degree">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="year">Year of Study</label>
+                                                            <input type="number" class="form-control" id="year" placeholder="Enter your current year of study" data-bind="value: year">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="internship">Expected Internship Period</label>
+                                                            <input type="text" class="form-control" id="internship" placeholder="Enter your expected internship period" data-bind="value: expectedInternshipPeriod">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="graduation">Expected Graduation Date</label>
+                                                            <input type="date" class="form-control" id="graduation" placeholder="Enter your expected graduation date" data-bind="value: expectedGraduationDate">
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary" data-bind="click: educationBackground">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="skillsCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Skills and Expertise</h5>
+                                                    <form id="skills-form">
+                                                        <div class="form-group">
+                                                            <label for="technical-skills">Technical Skills</label>
+                                                            <input type="text" class="form-control" id="technical-skills" placeholder="E.g., programming languages, software proficiency" data-bind="value: technicalSkills">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="soft-skills">Soft Skills</label>
+                                                            <input type="text" class="form-control" id="soft-skills" placeholder="E.g., communication, teamwork, problem-solving" data-bind="value: softSkills">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="language">Language Proficiency</label>
+                                                            <input type="text" class="form-control" id="language" placeholder="Enter your language proficiency" data-bind="value: languageProficiency">
+
+                                                        </div>
+                                                        <button type="submit" data-bind="click: submitSkills" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="workExperienceCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Work Experience</h5>
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="internships">Internships</label>
+                                                            <textarea class="form-control" id="internships" rows="3" placeholder="Describe your internships" data-bind="value: internships"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="part-time-jobs">Part-time Jobs</label>
+                                                            <textarea class="form-control" id="part-time-jobs" rows="3" placeholder="Describe your part-time jobs" data-bind="value: partTimeJobs"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="volunteer-work">Volunteer Work</label>
+                                                            <textarea class="form-control" id="volunteer-work" rows="3" placeholder="Describe your volunteer work" data-bind="value: volunteerWork"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="projects">Relevant Projects or Research Experience</label>
+                                                            <textarea class="form-control" id="projects" rows="3" placeholder="Describe your relevant projects or research experience" data-bind="value: relevantProjects"></textarea>
+                                                        </div>
+                                                        <button type="submit" data-bind="click: submitWorkExperience" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="projectsCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Projects Done</h5>
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="project-description">Description of Projects Completed</label>
+                                                            <textarea class="form-control" id="project-description" rows="3" placeholder="Describe your completed projects" data-bind="value: projectDescription"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="project-objectives">Objectives and Outcomes Achieved</label>
+                                                            <textarea class="form-control" id="project-objectives" rows="3" placeholder="Describe the objectives and outcomes of your projects" data-bind="value: projectObjectives"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="project-technologies">Technologies or Tools Used</label>
+                                                            <textarea class="form-control" id="project-technologies" rows="3" placeholder="Describe the technologies or tools used in your projects" data-bind="value: projectTechnologies"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="project-roles">Roles and Responsibilities</label>
+                                                            <textarea class="form-control" id="project-roles" rows="3" placeholder="Describe your roles and responsibilities in the projects" data-bind="value: projectRoles"></textarea>
+                                                        </div>
+                                                        <button type="submit" data-bind="click: submitProjects" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="extraCurricularCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Extracurricular Activities</h5>
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="clubs">Clubs or Organizations</label>
+                                                            <textarea class="form-control" id="clubs" rows="3" placeholder="Describe your involvement in clubs or organizations" data-bind="value: clubs"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="leadership">Leadership Roles</label>
+                                                            <textarea class="form-control" id="leadership" rows="3" placeholder="Describe your leadership roles" data-bind="value: leadershipRoles"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="awards">Awards or Achievements</label>
+                                                            <textarea class="form-control" id="awards" rows="3" placeholder="Describe your awards or achievements" data-bind="value: awards"></textarea>
+                                                        </div>
+                                                        <button type="submit" data-bind="click: submitExtracurricular" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="careerCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Career Interests</h5>
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="industry">Desired Industry or Field</label>
+                                                            <select class="form-control" id="industry" data-bind="value: desiredIndustry">
+                                                                <option selected>Choose...</option>
+                                                                <option value="Tech">Technology</option>
+                                                                <option value="Finance">Finance</option>
+                                                                <option value="Health">Healthcare</option>
+                                                                <option value="Marketing">Marketing</option>
+                                                                <option value="Engineering">Engineering</option>
+                                                                <option value="Education">Education</option>
+                                                                <option value="Hospitality">Hospitality</option>
+                                                                <option value="Education">Education</option>
+                                                                <option value="Nonprofit">Non-Profit</option>
+                                                                <option value="Retail">Retail</option>
+                                                                <option value="Education">Education</option>
+                                                                <option value="Entertainment">Entertainment</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="roles">Preferred Job Functions or Roles</label>
+                                                            <select class="form-control" id="roles" data-bind="value: preferredRoles">
+                                                                <option selected>Choose...</option>
+                                                                <option value="Developer">Developer</option>
+                                                                <option value="Analyst">Analyst</option>
+                                                                <option value="Manager">Manager</option>
+                                                                <option value="Software_engineer">Software Engineer</option>
+                                                                <option value="Data_scientist">Data Scientist</option>
+                                                                <option value="Nurse">Nurse</option>
+                                                                <option value="Doctor">Doctor</option>
+                                                                <option value="Financial_advisor">Financial Advisor</option>
+                                                                <option value="Accountant">Accountant</option>
+                                                                <option value="Marketing_specialist">Marketing Specialist</option>
+                                                                <option value="Seo_specialist">SEO Specialist</option>
+                                                                <option value="Mechanical_engineer">Mechanical Engineer</option>
+                                                                <option value="Civil_engineer">Civil Engineer</option>
+                                                                <option value="Teacher">Teacher</option>
+                                                                <option value="Professor">Professor</option>
+                                                                <option value="Hotel_manager">Hotel Manager</option>
+                                                                <option value="Chef">Chef</option>
+                                                                <option value="Social_worker">Social Worker</option>
+                                                                <option value="Fundraiser">Fundraiser</option>
+                                                                <option value="Store_manager">Store Manager</option>
+                                                                <option value="Sales_associate">Sales Associate</option>
+                                                                <option value="Actor">Actor</option>
+                                                                <option value="Musician">Musician</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="goals">Career Goals and Aspirations</label>
+                                                            <textarea class="form-control" id="goals" rows="3" placeholder="Describe your career goals and aspirations" data-bind="value: careerGoals"></textarea>
+                                                        </div>
+                                                        <button type="submit" data-bind="click: submitCareerInterest" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="certificationCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Certifications and Training</h5>
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="certifications">Relevant Certifications</label>
+                                                            <textarea class="form-control" id="certifications" rows="3" placeholder="E.g., programming languages, industry-specific certifications" data-bind="value: relevantCertifications"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="training">Training Programs Attended</label>
+                                                            <textarea class="form-control" id="training" rows="3" placeholder="Describe the training programs you have attended" data-bind="value: trainingPrograms"></textarea>
+                                                        </div>
+                                                        <button type="submit" data-bind="click: submitCertificationsTraining" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="availabilityCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Availability</h5>
+                                                    <form>
+                                                        <!-- Availability for Internships -->
+                                                        <div class="form-group">
+                                                            <label for="internshipAvailability">Availability for Internships</label>
+                                                            <select class="form-control" id="internshipAvailability" data-bind="value: internshipAvailability">
+                                                                <option selected>Choose...</option>
+                                                                <option value="Full-time">Full-Time</option>
+                                                                <option value="Part-time">Part-Time</option>
+                                                                <option value="Summer">Summer Internship</option>
+                                                                <option value="Remote">Remote</option>
+                                                                <option value="On-site">On-site</option>
+                                                                <option value="Paid">Paid</option>
+                                                                <option value="Unpaid">Unpaid</option>
+                                                                <option value="Year-round">Year-round Internship</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <!-- Preferred Start Date -->
+                                                        <div class="form-group">
+                                                            <label for="startDate">Preferred Start Date</label>
+                                                            <input type="datetime-local" class="form-control" id="startDate" data-bind="value: preferredStartDate">
+                                                        </div>
+
+                                                        <button type="submit" data-bind="click: submitAvailability" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="referenceCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">References</h5>
+                                                    <form>
+                                                        <!-- Reference 1 -->
+                                                        <div class="form-group">
+                                                            <label for="reference1">Reference 1</label>
+                                                            <input type="text" class="form-control" id="reference1" placeholder="Enter Reference 1" data-bind="value: reference1">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="contact1">Contact Details for Reference 1</label>
+                                                            <input type="text" class="form-control" id="contact1" placeholder="Enter Contact Details for Reference 1" data-bind="value: contact1">
+                                                        </div>
+
+                                                        <!-- Reference 2 -->
+                                                        <div class="form-group">
+                                                            <label for="reference2">Reference 2</label>
+                                                            <input type="text" class="form-control" id="reference2" placeholder="Enter Reference 2" data-bind="value: reference2">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="contact2">Contact Details for Reference 2</label>
+                                                            <input type="text" class="form-control" id="contact2" placeholder="Enter Contact Details for Reference 2" data-bind="value: contact2">
+                                                        </div>
+
+                                                        <!-- Reference 3 -->
+                                                        <div class="form-group">
+                                                            <label for="reference3">Reference 3</label>
+                                                            <input type="text" class="form-control" id="reference3" placeholder="Enter Reference 3" data-bind="value: reference3">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="contact3">Contact Details for Reference 3</label>
+                                                            <input type="text" class="form-control" id="contact3" placeholder="Enter Contact Details for Reference 3" data-bind="value: contact3">
+                                                        </div>
+
+                                                        <button type="submit" data-bind="click: submitReferences" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="portfolioCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Portfolio</h5>
+                                                    <form>
+                                                        <!-- Portfolio Link 1 -->
+                                                        <div class="form-group">
+                                                            <label for="portfolioLink1">Portfolio Link 1</label>
+                                                            <input type="text" class="form-control" id="portfolioLink1" placeholder="Enter your first portfolio link" data-bind="value: portfolioLink1">
+                                                        </div>
+
+                                                        <!-- Work Sample 1 -->
+                                                        <div class="form-group">
+                                                            <label for="workSample1">Work Sample 1</label>
+                                                            <textarea class="form-control" id="workSample1" rows="3" placeholder="Describe your first work sample" data-bind="value: workSample1"></textarea>
+                                                        </div>
+
+                                                        <!-- Portfolio Link 2 -->
+                                                        <div class="form-group">
+                                                            <label for="portfolioLink2">Portfolio Link 2</label>
+                                                            <input type="text" class="form-control" id="portfolioLink2" placeholder="Enter your second portfolio link" data-bind="value: portfolioLink2">
+                                                        </div>
+
+                                                        <!-- Work Sample 2 -->
+                                                        <div class="form-group">
+                                                            <label for="workSample2">Work Sample 2</label>
+                                                            <textarea class="form-control" id="workSample2" rows="3" placeholder="Describe your second work sample" data-bind="value: workSample2"></textarea>
+                                                        </div>
+
+                                                        <!-- Portfolio Link 3 -->
+                                                        <div class="form-group">
+                                                            <label for="portfolioLink3">Portfolio Link 3</label>
+                                                            <input type="text" class="form-control" id="portfolioLink3" placeholder="Enter your third portfolio link" data-bind="value: portfolioLink3">
+                                                        </div>
+
+                                                        <!-- Work Sample 3 -->
+                                                        <div class="form-group">
+                                                            <label for="workSample3">Work Sample 3</label>
+                                                            <textarea class="form-control" id="workSample3" rows="3" placeholder="Describe your third work sample" data-bind="value: workSample3"></textarea>
+                                                        </div>
+
+                                                        <button type="submit" data-bind="click: submitPortfolio" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        
+                                        <!--<div class="col-xl-6 col-6">
+                                            <div class="card mb-3" id="preferenceCard">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Preferences</h5>
+                                                    <form>-->
+                                                        <!-- Location Preference for Internships -->
+                                                        <!--<div class="form-group">
+                                                            <label for="locationPreference">Location Preference for Internships</label>
+                                                            <select class="form-control" id="locationPreference" data-bind="value: locationPreference">
+                                                                <option selected>Choose...</option>
+                                                                <option value="mombasa">Mombasa</option>
+                                                                <option value="kwale">Kwale</option>
+                                                                <option value="kilifi">Kilifi</option>
+                                                                <option value="tana_river">Tana River</option>
+                                                                <option value="lamu">Lamu</option>
+                                                                <option value="taita_taveta">Taita-Taveta</option>
+                                                                <option value="garissa">Garissa</option>
+                                                                <option value="wajir">Wajir</option>
+                                                                <option value="mandera">Mandera</option>
+                                                                <option value="marsabit">Marsabit</option>
+                                                                <option value="isiolo">Isiolo</option>
+                                                                <option value="meru">Meru</option>
+                                                                <option value="tharaka_nithi">Tharaka-Nithi</option>
+                                                                <option value="embu">Embu</option>
+                                                                <option value="kitui">Kitui</option>
+                                                                <option value="machakos">Machakos</option>
+                                                                <option value="makueni">Makueni</option>
+                                                                <option value="nyandarua">Nyandarua</option>
+                                                                <option value="nyeri">Nyeri</option>
+                                                                <option value="kirinyaga">Kirinyaga</option>
+                                                                <option value="muranga">Murang'a</option>
+                                                                <option value="kiambu">Kiambu</option>
+                                                                <option value="turkana">Turkana</option>
+                                                                <option value="west_pokot">West Pokot</option>
+                                                                <option value="samburu">Samburu</option>
+                                                                <option value="trans_nzoia">Trans-Nzoia</option>
+                                                                <option value="uasin_gishu">Uasin Gishu</option>
+                                                                <option value="elgeyo_marakwet">Elgeyo-Marakwet</option>
+                                                                <option value="nandi">Nandi</option>
+                                                                <option value="baringo">Baringo</option>
+                                                                <option value="laikipia">Laikipia</option>
+                                                                <option value="nakuru">Nakuru</option>
+                                                                <option value="narok">Narok</option>
+                                                                <option value="kajiado">Kajiado</option>
+                                                                <option value="kericho">Kericho</option>
+                                                                <option value="bomet">Bomet</option>
+                                                                <option value="kakamega">Kakamega</option>
+                                                                <option value="vihiga">Vihiga</option>
+                                                                <option value="bungoma">Bungoma</option>
+                                                                <option value="busia">Busia</option>
+                                                                <option value="siaya">Siaya</option>
+                                                                <option value="kisumu">Kisumu</option>
+                                                                <option value="homa_bay">Homa Bay</option>
+                                                                <option value="migori">Migori</option>
+                                                                <option value="kisii">Kisii</option>
+                                                                <option value="nyamira">Nyamira</option>
+                                                                <option value="nairobi">Nairobi</option>
+                                                            </select>
+                                                        </div>-->
+
+                                                        <!-- Industry Preferences -->
+                                                        <!--<div class="form-group">
+                                                            <label for="industryPreferences">Industry Preferences</label>
+                                                            <select class="form-control" id="industryPreferences" data-bind="value: industryPreferences">
+                                                                <option selected>Choose...</option>
+                                                                <option value="tech">Technology</option>
+                                                                <option value="finance">Finance</option>
+                                                                <option value="health">Healthcare</option>
+                                                                <option value="marketing">Marketing</option>
+                                                                <option value="engineering">Engineering</option>
+                                                                <option value="education">Education</option>
+                                                                <option value="hospitality">Hospitality</option>
+                                                                <option value="education">Education</option>
+                                                                <option value="nonprofit">Non-Profit</option>
+                                                                <option value="retail">Retail</option>
+                                                                <option value="education">Education</option>
+                                                                <option value="entertainment">Entertainment</option>
+                                                            </select>
+                                                        </div>-->
+
+                                                        <!-- Company Size or Type Preferences -->
+                                                        <!--<div class="form-group">
+                                                            <label for="companyPreferences">Company Size or Type Preferences</label>
+                                                            <select class="form-control" id="companyPreferences" data-bind="value: companyPreferences">
+                                                                <option selected>Choose...</option>
+                                                                <option value="startup">Startup</option>
+                                                                <option value="sme">Small and Medium Enterprises (SME)</option>
+                                                                <option value="large">Large Corporations</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <button type="submit" data-bind="click: submitPreferences" class="btn btn-primary mt-3">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>-->
+
+                                        <div class="col-xl-12 col-12">
+                                            <div class="card mb-3" id="successMessage">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Congratulations</h5>
+                                                    <!-- Add a success message here -->
+                                                    <div class="alert alert-success mt-3">
+                                                        <strong>Success!</strong> Your Profile has been updated successfully.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-my-jobs" role="tabpanel" aria-labelledby="tab-my-jobs">
+                                <h3 class="mt-0 color-brand-1 mb-50">My Profile</h3>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">Educational Background</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Current School/University</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: school, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Degree Program/Diploma/Certificate</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: degree, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Year of Study</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: year, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Expected Internship Period</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: expectedInternshipPeriod, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Expected Graduation Date</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: expectedGraduationDate, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div id="alertArea1" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditEducation, visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">Skills and Expertise</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Technical Skills</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: technicalSkills, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Soft Skills</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: softSkills, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Language Proficiency</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: languageProficiency, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div id="alertArea2" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditSkills, visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">Extracurricular Activities</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Clubs or Organizations</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: clubs, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Leadership Roles</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: leadershipRoles, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Awards or Achievements</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: awards, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div id="alertArea3" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditExtraCurricular, visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">Career Interests</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Desired Industry or Field</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: desiredIndustry, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Preferred Job Functions or Roles</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: preferredRoles, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Career Goals and Aspirations</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: careerGoals, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div id="alertArea4" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditExtraCurricular, visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">Availability</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Availability for Internships</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: internshipAvailability, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Preferred Start Date</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: preferredStartDate, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div id="alertArea5" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditAvailability, visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">Certifications and Training</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Relevant Certifications</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: relevantCertifications, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Training Programs Attended</label>
+                                                    <input class="form-control" type="text" value="" data-bind="value: trainingPrograms, attr: { readonly: !isEditing() }">
+                                                </div>
+                                                <div id="alertArea6" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditCertifications , visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">Work Experience</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Internships</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: internships, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Part-time Jobs</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: partTimeJobs, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Volunteer Work</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: volunteerWork, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Relevant Projects or Research Experience</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: relevantProjects, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div id="alertArea7" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditWork, visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">Projects Done</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Description of Projects Completed</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: projectDescription, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Objectives and Outcomes Achieved</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: projectObjectives, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Technologies or Tools Used</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: projectTechnologies, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Roles and Responsibilities</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: projectRoles, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div id="alertArea8" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditProject, visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">References</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Reference 1</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: reference1, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Contact Details for Reference 1</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: contact1, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Reference 2</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: reference2, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Contact Details for Reference 2</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: contact2, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Reference 3</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: reference3, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Contact Details for Reference 3</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: contact3, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div id="alertArea9" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditReferences, visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-12" data-bind="with: new Card()">
+                                        <div class="box-skills">
+                                            <h5 class="mt-0 color-brand-1">Portfolio</h5>
+                                            <div class="form-contact">
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Portfolio Link 1</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: portfolioLink1, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Work Sample 1</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: workSample1, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Portfolio Link 2</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: portfolioLink2, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Work Sample 2</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: workSample2, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Portfolio Link 3</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: portfolioLink3, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-sm mb-10">Work Sample 3</label>
+                                                    <textarea class="form-control" type="text" value="" data-bind="value: workSample3, attr: { readonly: !isEditing() }"></textarea>
+                                                </div>
+                                                <div id="alertArea10" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="row">
+                                                    <button type="submit" class="btn btn-primary ml-130" style="width:30%" data-bind="click: edit, visible: !isEditing()">Edit</button>
+                                                    <button type="submit" class="btn btn-success ml-130" style="width:30%" data-bind="click: submitEditPortfolio, visible: isEditing()">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                                </div>
+                            </div>                           
+                        </div>
+                    </div>
+              
+                    </section>  
+</main>
+
+@section Scripts{
+    <script src="/assets/js/UserResume/resume.js"></script>
+}
+
+
+@*<script>
+        $('input[type="checkbox"]').on('change', function () {
+            var selectedOptions = [];
+            $(this).closest('.form-group').find('input[type="checkbox"]:checked').each(function () {
+                selectedOptions.push($(this).val());
+            });
+            $(this).closest('.form-group').find('input[type="text"]').val(selectedOptions.join(', '));
+        });
+    </script>*@

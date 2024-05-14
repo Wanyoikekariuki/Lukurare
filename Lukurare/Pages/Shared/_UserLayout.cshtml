@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <link rel="manifest" href="manifest.html" crossorigin>
+    <meta name="msapplication-config" content="browserconfig.html">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/imgs/template/favicon.svg">
+    <link href="/assets/css/stylecd4e.css?version=4.1" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>Lukurare</title>
+</head>
+<body>
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center"><img src="/Admin/assets/imgs/template/loading.gif" alt="Lukurare"></div>
+            </div>
+        </div>
+    </div>
+    <header class="header sticky-bar">
+        <div class="container">
+            <div class="main-header">
+                <div class="header-left">
+                    <div class="header-logo"><a class='d-flex' href='/Index'><h3>Lukurare</h3></a></div>
+                </div>
+                <div class="header-nav">
+                    <nav class="nav-main-menu">
+                        <ul class="main-menu">
+                            <li class="">
+                                <a class='active' href='/User/UserProfile'>Home</a>
+                            </li>
+                            <li class="">
+                                <a href='/User/AllProjects'>Projects</a>
+                            </li>
+                            @*<li class="">
+                                    <a href='/WebPages/companies'>Companies</a>
+                                </li>*@
+                            @*<li class="">
+                                    <a href='/WebPages/blog'>Blog</a>
+                                </li>*@
+                            @*<li class="">
+                                    <a href='/WebPages/aboutUs'>About Us</a>
+                                </li>*@
+                            @*<li class="">
+                                    <a href='/WebPages/contactUs'>Contact Us</a>
+                                </li>*@
+                            @*<li class="dashboard"><a href="/Admin/Dashboard" target="_blank">Dashboard</a></li>*@
+                        </ul>
+                    </nav>
+                    <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
+                </div>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-pic">
+                                <img data-bind="attr: { src: PhotoLinkUrl}" alt="Profile Picture">
+                            </div>
+                            <!-- Profile name goes here -->
+                            <span class="ml-2" data-bind="text: Brand">Profile Name</span>
+                            <!-- You can also use icon as follows: -->
+                            <!--  <i class="fas fa-user"></i> -->
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @*<a class="dropdown-item" href="/User/UserProfile">Profile</a>*@
+                            <a class="dropdown-item" onclick="logOutUser();" href="#">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+                @*<div class="header-right">
+                        <div class="block-signin"><a class='text-link-bd-btom hover-up' href='/Authentication/Register'>Register</a><a class='btn btn-default btn-shadow ml-40 hover-up' href='/Authentication/Login'>Sign in</a></div>
+                    </div>*@
+            </div>
+        </div>
+    </header>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-content-area">
+                <div class="perfect-scroll">
+                    <div class="mobile-search mobile-header-border mb-30">
+                        <div class="text-center"><h3>Lukurare</h3></div>
+                    </div>
+                    <div class="mobile-menu-wrap mobile-header-border">
+                        <!-- mobile menu start-->
+                        <nav>
+                            <ul class="mobile-menu font-heading">
+                                <li class="has-children">
+                                    <a class='active' href='/User/UserProfile'>Home</a>
+                                </li>
+                                <li class="has-children">
+                                    <a href='/User/AllProjects'>Projects</a>
+                                </li>
+                                @*<li class="has-children">
+                                    <a href='/Companies/CompanyLogin'>Host Company</a>
+                                </li>
+                                <li class="has-children">
+                                    <a href='/About'>About Us</a>
+                                </li>*@
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="mobile-account">
+                            <h6 class="mb-10" data-bind="text: Brand"></h6>
+                            <ul class="mobile-menu font-heading">                                
+                                <li><a href='#' onclick="logOutUser();">Log Out</a></li>
+                            </ul>
+                        </div>
+                    <div class="site-copyright">Copyright 2024 &copy; Lukurare</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main class="main">
+        @RenderBody()
+    </main>
+
+    <footer class="footer mt-50">
+        <div class="container">
+            <div class="footer-bottom mt-50">
+                <div class="row">
+                    <div class="col-md-6"><span class="font-xs color-text-paragraph">Copyright &copy; 2024. Lukurare all right reserved</span></div>
+                    <div class="col-md-6 text-md-end text-start">
+                        <div class="footer-social d-inline-block">
+                            <a class="icon-socials icon-facebook" href="#"></a>
+                            <a class="icon-socials icon-twitter" href="#"></a>
+                            <a class="icon-socials icon-linkedin" href="#"></a>
+                        </div>
+                        @*<div class="footer-social">
+            <a class="font-xs color-text-paragraph" href="#">Privacy Policy</a>
+            <a class="font-xs color-text-paragraph mr-30 ml-30" href="#">Terms &amp; Conditions</a>
+            <a class="font-xs color-text-paragraph" href="#">Security</a>
+        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="/assets/js/knockout-3.5.1.js"></script>
+    <script src="/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="/vendors/jqueryconfirm/jquery-confirm.min.js"></script>
+    <script src="/vendors/leizam/js/jqueryAjaxGenerics.js"></script>
+    <script src="/vendors/leizam/js/jqueryConfirmGenerics.js"></script>
+    <script src="/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/plugins/waypoints.js"></script>
+    <script src="/assets/js/plugins/wow.js"></script>
+    <script type="text/javascript" src="/assets/js/blockUI.js"></script>
+    <script src="/assets/js/plugins/magnific-popup.js"></script>
+    @*<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>*@
+    <script src="/assets/js/plugins/select2.min.js"></script>
+    <script src="/assets/js/plugins/isotope.js"></script>
+    <script src="/assets/js/plugins/scrollup.js"></script>
+    <script src="/assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="/assets/js/noUISlider.js"></script>
+    <script src="/assets/js/slider.js"></script>
+    <script src="/assets/js/main8c94.js?v=4.1"></script>
+    <script src="/vendors/dayJs/1.10.7/dayjs.min.js"></script>
+    <script src="/assets/js/shared/_layout.js"></script>
+    <script src="/vendors/leizam/js/authenticationHelper.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

@@ -1,0 +1,398 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<main class="main">
+    <section class="section-box">
+        <div class="banner-hero hero-1 banner-homepage4">
+            <div class="banner-inner">
+                <div class="row">
+                    <div class="col-xl-7 col-lg-12">
+                        <div class="block-banner">
+                            <h1 class="heading-banner wow animate__animated animate__fadeInUp">Kickstart  <span class="color-brand-2">  your</span>  Career</h1>
+                            <div class="banner-description mt-20 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">Embark on an exciting journey filled with meaningful projects,<br class="d-none d-lg-block">invaluable experiences, and endless opportunities to kickstart your career!"</div>
+                            <div class="form-find mt-40 wow animate__animated animate__fadeIn" data-wow-delay=".2s">
+                                <form>
+                                    <div class="box-industry">
+                                        <select class="form-input mr-12 select-active input-industry" data-bind="value: selectedIndustry">
+                                            <option selected>Industry...</option>
+                                            <option value="Tech">Technology</option>
+                                            <option value="Finance">Finance</option>
+                                            <option value="Health">Healthcare</option>
+                                            <option value="Marketing">Marketing</option>
+                                            <option value="Engineering">Engineering</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Hospitality">Hospitality</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Nonprofit">Non-Profit</option>
+                                            <option value="Retail">Retail</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                        </select>
+                                    </div>
+                                    <select class="form-input mr-12 select-active" data-bind="value: selectedLocation">
+                                        <option selected>Location...</option>
+                                        <option value="Mombasa">Mombasa</option>
+                                        <option value="Kwale">Kwale</option>
+                                        <option value="Kilifi">Kilifi</option>
+                                        <option value="Tana_river">Tana River</option>
+                                        <option value="Lamu">Lamu</option>
+                                        <option value="Taita_taveta">Taita-Taveta</option>
+                                        <option value="Garissa">Garissa</option>
+                                        <option value="Wajir">Wajir</option>
+                                        <option value="Mandera">Mandera</option>
+                                        <option value="Marsabit">Marsabit</option>
+                                        <option value="Isiolo">Isiolo</option>
+                                        <option value="Meru">Meru</option>
+                                        <option value="Tharaka_nithi">Tharaka-Nithi</option>
+                                        <option value="Embu">Embu</option>
+                                        <option value="Kitui">Kitui</option>
+                                        <option value="Machakos">Machakos</option>
+                                        <option value="Makueni">Makueni</option>
+                                        <option value="Nyandarua">Nyandarua</option>
+                                        <option value="Nyeri">Nyeri</option>
+                                        <option value="Kirinyaga">Kirinyaga</option>
+                                        <option value="Muranga">Murang'a</option>
+                                        <option value="Kiambu">Kiambu</option>
+                                        <option value="Turkana">Turkana</option>
+                                        <option value="West_pokot">West Pokot</option>
+                                        <option value="Samburu">Samburu</option>
+                                        <option value="Trans_nzoia">Trans-Nzoia</option>
+                                        <option value="Uasin_gishu">Uasin Gishu</option>
+                                        <option value="Elgeyo_marakwet">Elgeyo-Marakwet</option>
+                                        <option value="Nandi">Nandi</option>
+                                        <option value="Baringo">Baringo</option>
+                                        <option value="Laikipia">Laikipia</option>
+                                        <option value="Nakuru">Nakuru</option>
+                                        <option value="Narok">Narok</option>
+                                        <option value="Kajiado">Kajiado</option>
+                                        <option value="Kericho">Kericho</option>
+                                        <option value="Bomet">Bomet</option>
+                                        <option value="Kakamega">Kakamega</option>
+                                        <option value="Vihiga">Vihiga</option>
+                                        <option value="Bungoma">Bungoma</option>
+                                        <option value="Busia">Busia</option>
+                                        <option value="Siaya">Siaya</option>
+                                        <option value="Kisumu">Kisumu</option>
+                                        <option value="Homa_bay">Homa Bay</option>
+                                        <option value="Migori">Migori</option>
+                                        <option value="Kisii">Kisii</option>
+                                        <option value="Nyamira">Nyamira</option>
+                                        <option value="Nairobi">Nairobi</option>
+                                    </select>
+                                    @*<input class="form-input input-keysearch mr-12" type="text" placeholder="Your keyword... ">*@
+                                    <a class="btn btn-default btn-find font-sm" data-bind="click: indexSearch">Search</a>
+                                </form>
+                            </div>
+                            <div class="list-tags-banner mt-60 wow animate__animated animate__fadeInUp" data-wow-delay=".3s"><strong>Popular Searches:</strong><a href="#">Designer</a>, <a href="#">Tech</a>, <a href="#">Finance</a>, <a href="#">Developer</a>, <a href="#">Retail</a>, <a href="#">Senior</a>, <a href="#">Engineer</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-12 d-none d-xl-block col-md-6">
+                        <div class="banner-imgs">
+                            <div class="block-1 shape-1"><img class="img-responsive" alt="SeekersHub" src="assets/imgs/page/homepage4/banner.png"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    @*<section class="section-box mt-20">
+            <div class="section-box wow animate__animated animate__fadeIn">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-title mb-10 wow animate__animated animate__fadeInUp">Browse by category</h2>
+                        <p class="font-lg color-text-paragraph-2 wow animate__animated animate__fadeInUp">Find the Project that&rsquo;s perfect for you.</p>
+                    </div>
+                    <div class="box-swiper mt-50">
+                        <div class="swiper-container swiper-group-5 swiper">
+                            <div class="swiper-wrapper pb-70 pt-5">
+                                <div class="swiper-slide hover-up">
+                                    <a href='jobs-list.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="SeekersHub" src="/assets/imgs/page/homepage1/marketing.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Sales &amp; Marketing</h4>
+                                                <p class="font-xs">15<span> Projects Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a><a href='jobs-grid.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="SeekersHub" src="/assets/imgs/page/homepage1/customer.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Engineering</h4>
+                                                <p class="font-xs">18<span> Projects Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide hover-up">
+                                    <a href='jobs-grid.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="SeekersHub" src="/assets/imgs/page/homepage1/finance.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Finance</h4>
+                                                <p class="font-xs">16<span> Projects Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a><a href='jobs-list.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="SeekersHub" src="/assets/imgs/page/homepage1/lightning.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Technology</h4>
+                                                <p class="font-xs">56<span> Projects Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide hover-up">
+                                    <a href='jobs-grid.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="SeekersHub" src="/assets/imgs/page/homepage1/human.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Hospitality</h4>
+                                                <p class="font-xs">165<span> Projectss Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a><a href='jobs-grid.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="SeekersHub" src="/assets/imgs/page/homepage1/management.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Healthcare</h4>
+                                                <p class="font-xs">9<span> Projects Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide hover-up">
+                                    <a href='jobs-list.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="jobBox" src="/assets/imgs/page/homepage1/retail.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Retail &amp; Products</h4>
+                                                <p class="font-xs">5<span> Projects Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a><a href='jobs-grid.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="SeekersHub" src="/assets/imgs/page/homepage1/security.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Entertainment</h4>
+                                                <p class="font-xs">2<span> Projects Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide hover-up">
+                                    <a href='jobs-grid.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="SeekersHub" src="/assets/imgs/page/homepage1/content.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Non-Profit</h4>
+                                                <p class="font-xs">14<span> Projects Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a><a href='jobs-list.html'>
+                                        <div class="item-logo">
+                                            <div class="image-left"><img alt="SeekersHub" src="/assets/imgs/page/homepage1/research.svg"></div>
+                                            <div class="text-info-right">
+                                                <h4>Market Research</h4>
+                                                <p class="font-xs">5<span> Projects Available</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+    <section class="section-box mt-10 mb-40">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title mb-10 wow animate__animated animate__fadeInUp">How It Works</h2>
+                @*<p class="font-lg color-text-paragraph-2 wow animate__animated animate__fadeInUp">Just via some simple steps, you will find your ideal candidates you’r looking for!</p>*@
+            </div>
+            <div class="mt-70">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12 col-md-6">
+                        <div class="box-step step-1">
+                            <h1 class="number-element">1</h1>
+                            <h4 class="mb-20">Register an<br class="d-none d-lg-block"> account to start</h4>
+                            <p class="font-lg color-text-paragraph-2">Sign up to access tailored <br class="d-none d-lg-block">opportunities and begin your journey towards professional growth.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 col-md-6">
+                        <div class="box-step step-2">
+                            <h1 class="number-element">2</h1>
+                            <h4 class="mb-20">Update<br class="d-none d-lg-block"> your Profile</h4>
+                            <p class="font-lg color-text-paragraph-2">Complete your profileto showcase<br class="d-none d-lg-block">your skills and interests, enhancing your chances of securing internships.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 col-md-6">
+                        <div class="box-step">
+                            <h1 class="number-element">3</h1>
+                            <h4 class="mb-20">Find the most<br class="d-none d-lg-block"> suitable Project</h4>
+                            <p class="font-lg color-text-paragraph-2">Explore diverse Projects,<br class="d-none d-lg-block">filtering by industry, location, and duration to discover the perfect internship fit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-50 text-center"><a class="btn btn-default" href="/Authentication/Login">Get Started</a></div>
+        </div>
+    </section>
+
+
+    <section class="section-box mt-50">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title mb-10 wow animate__animated animate__fadeInUp">Our Programs</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-15 mb-lg-0">
+                    <div class="box-radius-8 bg-urgent hover-up">
+                        <div class="image">
+                            <figure><img src="/assets/imgs/page/homepage2/job-tools.png" alt="SeekersHub"></figure>
+                        </div>
+                        <div class="text-info">
+                            <h3>Intern-match</h3>
+                            <p class="font-sm color-text-paragraph-2 w-lg-250">
+                                Explore exciting internship opportunities tailored to your interests and career goals.
+                                Join a vibrant community of ambitious students and forward-thinking companies.
+                                Get matched with internships that ignite your passion and propel your career forward.
+                            </p>
+                            <div class="mt-15"><a class="btn btn-arrow-right" href="/Projects">Discover Projects</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="box-radius-8 bg-9 hover-up">
+                        <div class="image">
+                            <figure><img src="/assets/imgs/page/homepage2/planning-job.png" alt="SeekersHub"></figure>
+                        </div>
+                        <div class="text-info">
+                            <h3>Mentormatch</h3>
+                            <p class="font-sm color-text-paragraph-2">
+                                Connect with experienced mentors who are eager to share their knowledge and expertise with you.
+                                Gain valuable insights, guidance, and support as you navigate your career journey.
+                                Your mentorship journey begins here with MentorMatch
+                            </p>
+                            <div class="mt-15"><a class="btn btn-arrow-right" href="/About">Find Out More</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-box mt-50 mb-30 bg-brand-2 pt-60 pb-60">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 text-center">
+                    <div class="pt-40">
+                        <h2 class="color-white mb-20">Unlock Exciting Opportunities <br /> With SeekersHub</h2>
+                        <p class="color-white mb-30">
+                            Get ready to open doors to a world of possibilities! With SeekersHub, your will gain access to a diverse range of internship opportunities spanning various industries and sectors across Kenya.
+                            Whether they're exploring new career paths or honing their skills in their chosen field, we've got the perfect internship waiting for you.
+                        </p>
+                        <div class="mt-20"> <a class="btn btn-brand-1 btn-icon-more hover-up" href="/Authentication/Login">Explore</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section-box mt-50">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title mb-10 wow animate__animated animate__fadeInUp">Partner with us</h2>
+                @*<h5 class="color-brand-2 mb-15 mt-15">University and Colleges</h5>*@
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 d-flex flex-column">
+                    <div class="box-radius-8 bg-urgent hover-up h-100 d-flex flex-column justify-content-between">
+                        <div class="image">
+                            <figure><img src="/assets/imgs/page/homepage2/job-tools.png" style="width:50%; height:50%;" alt="SeekersHub"></figure>
+                        </div>
+                        <div class="text-info ml-1">
+                            <h6>Student</h6>
+                            <p class="font-sm color-text-paragraph-2 w-lg-100">
+                                Join seekers-hub for tailored internship opportunities across diverse industries in Kenya.
+                                Discover the perfect internship to build your career path and gain valuable hands-on experience
+                            </p>
+                            <div class="mt-15"><a class="btn btn-arrow-right" href="/Projects">Discover Opportunities</a></div>
+                        </div>
+                    </div>
+                </div>               
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 d-flex flex-column">
+                    <div class="box-radius-8 bg-urgent hover-up h-100 d-flex flex-column justify-content-between">
+                        <div class="image">
+                            <figure><img src="/assets/imgs/page/homepage2/planning-job.png" style="width:50%; height:50%;" alt="SeekersHub"></figure>
+                        </div>
+                        <div class="text-info">
+                            <h6>Host Company</h6>
+                            <p class="font-sm color-text-paragraph-2 w-lg-100">
+                                Partner with us to access top emerging talent in the market.
+                                Gain skilled and motivated interns ready to bring fresh ideas and innovative solutions to your projects, elevating your team's performance
+                            </p>
+                            <div class="mt-15"><a class="btn btn-arrow-right" href="/Companies/CompanyLogin">Host Projects</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 d-flex flex-column">
+                    <div class="box-radius-8 bg-urgent hover-up h-100 d-flex flex-column justify-content-between">
+                        <div class="image">
+                            <figure><img src="/assets/imgs/page/homepage2/planning-job.png" style="width:50%; height:50%;" alt="SeekersHub"></figure>
+                        </div>
+                        <div class="text-info">
+                            <h6>Colleges/Universities</h6>
+                            <p class="font-sm color-text-paragraph-2 w-lg-100">
+                                Empower your students for success! Collaborate with us to offer diverse internship opportunities across industries,
+                                helping your students gain practical experience and skills
+                            </p>
+                            <div class="mt-15"><a class="btn btn-arrow-right" href="/About">Partner with Us</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+
+    <section class="section-box mt-50 mb-20">
+        <div class="box-newsletter box-newsletter-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-12 text-center d-none d-xl-block"><img src="/assets/imgs/page/homepage4/img-newsletter.png" alt="SeekersHub"></div>
+                    <div class="col-xl-8 col-lg-12 col-12 text-center">
+                        <div class="d-inline-block text-start">
+                            <h2 class="color-white">Subscribe our newsletter</h2>
+                            <p class="mt-10 font-lg color-white">New Things Will Always Update Regularly</p>
+                            <div class="box-form-newsletter mt-40">
+                                <form class="form-newsletter">
+                                    <input class="input-newsletter" type="text" value="" placeholder="Enter your email here">
+                                    <button class="btn btn-default font-heading icon-send-letter">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+@section Scripts{
+    <script src="/assets/js/index.js"></script>
+}

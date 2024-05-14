@@ -1,0 +1,135 @@
+﻿@page
+@model SeekersHub.Pages.Authentication.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<section class="pt-100 login-register">
+    <div class="container">
+        <div class="row login-register-cover">
+            <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
+                <div class="text-center">
+                    @*<p class="font-sm text-brand-2">Register </p>*@
+                    <h2 class="mt-10 mb-5 text-brand-1">Register your Company with Us</h2>
+                    @*<p class="font-sm text-muted mb-30">Access to all features. No credit card required.</p>
+                        <button class="btn social-login hover-up mb-20"><img src="/assets/imgs/template/icons/icon-google.svg" alt="SeekersHub"><strong>Sign up with Google</strong></button>
+                        <div class="divider-text-center"><span>Or continue with</span></div>*@
+                </div>
+                <form class="login-register text-start mt-20" action="#">
+                    <div class="form-group">
+                        <label class="form-label" for="input-1">Name of the Company *</label>
+                        <input class="form-control" id="input-1" type="text" required="" name="fullname" placeholder="Enter Name of Company" data-bind="value:FullName">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="input-1">Company Username *</label>
+                        <input class="form-control" id="input-1" type="text" required="" name="fullname" placeholder="Enter Company Username" data-bind="value:Username">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="input-2">Email *</label>
+                        <input class="form-control" id="input-2" type="email" required="" name="emailaddress" placeholder="Enter Company Email" data-bind="value:Email, valueUpdate:'afterkeydown',event: { change:validateEmail }">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="input-3">Telephone Number *</label>
+                        <input class="form-control" id="input-3" type="number" required="" name="username" placeholder="Enter Company Phone Number" data-bind="value:Phone">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="input-3">Physical Address *</label>
+                        <select class="form-control" id="locationPreference" data-bind="value:PhysicalAddress">
+                            <option selected>Choose...</option>
+                            <option value="Mombasa">Mombasa</option>
+                            <option value="Kwale">Kwale</option>
+                            <option value="Kilifi">Kilifi</option>
+                            <option value="Tana_river">Tana River</option>
+                            <option value="Lamu">Lamu</option>
+                            <option value="Taita_taveta">Taita-Taveta</option>
+                            <option value="Garissa">Garissa</option>
+                            <option value="Wajir">Wajir</option>
+                            <option value="Mandera">Mandera</option>
+                            <option value="Marsabit">Marsabit</option>
+                            <option value="Isiolo">Isiolo</option>
+                            <option value="Meru">Meru</option>
+                            <option value="Tharaka_nithi">Tharaka-Nithi</option>
+                            <option value="Embu">Embu</option>
+                            <option value="Kitui">Kitui</option>
+                            <option value="Machakos">Machakos</option>
+                            <option value="Makueni">Makueni</option>
+                            <option value="Nyandarua">Nyandarua</option>
+                            <option value="Nyeri">Nyeri</option>
+                            <option value="Kirinyaga">Kirinyaga</option>
+                            <option value="Muranga">Murang'a</option>
+                            <option value="Kiambu">Kiambu</option>
+                            <option value="Turkana">Turkana</option>
+                            <option value="West_pokot">West Pokot</option>
+                            <option value="Samburu">Samburu</option>
+                            <option value="Trans_nzoia">Trans-Nzoia</option>
+                            <option value="Uasin_gishu">Uasin Gishu</option>
+                            <option value="Elgeyo_marakwet">Elgeyo-Marakwet</option>
+                            <option value="Nandi">Nandi</option>
+                            <option value="Baringo">Baringo</option>
+                            <option value="Laikipia">Laikipia</option>
+                            <option value="Nakuru">Nakuru</option>
+                            <option value="Narok">Narok</option>
+                            <option value="Kajiado">Kajiado</option>
+                            <option value="Kericho">Kericho</option>
+                            <option value="Bomet">Bomet</option>
+                            <option value="Kakamega">Kakamega</option>
+                            <option value="Vihiga">Vihiga</option>
+                            <option value="Bungoma">Bungoma</option>
+                            <option value="Busia">Busia</option>
+                            <option value="Siaya">Siaya</option>
+                            <option value="Kisumu">Kisumu</option>
+                            <option value="Homa_bay">Homa Bay</option>
+                            <option value="Migori">Migori</option>
+                            <option value="Kisii">Kisii</option>
+                            <option value="Nyamira">Nyamira</option>
+                            <option value="Nairobi">Nairobi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="input-3">Industry Sector *</label>
+                        <select class="form-control" id="industry" data-bind="value: PostalAddress">
+                            <option selected>Choose...</option>
+                            <option value="Tech">Technology</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Health">Healthcare</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Education">Education</option>
+                            <option value="Hospitality">Hospitality</option>
+                            <option value="Education">Education</option>
+                            <option value="Nonprofit">Non-Profit</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Education">Education</option>
+                            <option value="Entertainment">Entertainment</option>
+                        </select>
+                    </div>
+                    @*<div class="form-group">
+            <label class="form-label" for="input-4">Password *</label>
+            <input class="form-control" id="input-4" type="password" required="" name="password" placeholder="************">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="input-5">Re-Password *</label>
+            <input class="form-control" id="input-5" type="password" required="" name="re-password" placeholder="************">
+        </div>*@
+                    <div class="login_footer form-group d-flex justify-content-between">
+                        <label class="cb-container">
+                            <input type="checkbox"><span class="text-small">Agree our terms and policy</span><span class="checkmark"></span>
+                        </label><a class='text-muted' href='/About'>Lean more</a>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-brand-1 hover-up w-100" type="submit" name="login" data-bind="click:registerReseller">Submit &amp; Register</button>
+                    </div>
+                    <div id="alertArea" class="alert" role="alert" style="display: none;"></div>
+                    <div class="text-muted text-center">Already have an account? <a href='/Companies/CompanyLogin'>Sign in</a></div>
+                </form>
+            </div>
+            <div class="img-1 d-none d-lg-block"><img class="shape-1" src="/assets/imgs/page/login-register/img-1.svg" alt="SeekersHub"></div>
+            <div class="img-2"><img src="/assets/imgs/page/login-register/img-2.svg" alt="SeekersHub"></div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{      
+    <script src="/assets/js/companies/companyRegister.js"></script>
+    <script src="/Companies/authenticationHelper.js"></script>    
+}

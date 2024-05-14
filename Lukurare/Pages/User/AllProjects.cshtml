@@ -1,0 +1,370 @@
+﻿@page
+@model Lukurare.Pages.User.AllProjectsModel
+@{
+    Layout = "/Pages/Shared/_UserLayout.cshtml";
+    ViewData["Title"] = "Projects";
+}
+<main class="main">
+    <section class="section-box-2">
+        <div class="container">
+            <div class="banner-hero banner-single banner-single-bg">
+                <div class="block-banner text-center">
+                    <h3 class="wow animate__animated animate__fadeInUp">
+                        <!-- ko if: NoOfProjects() > 0 -->
+                        <span class="color-brand-2" data-bind="text: NoOfProjects"></span>
+                        <span data-bind="text: NoOfProjects() > 1 ? 'Projects' : 'Project'"></span> Available Now
+                        <!-- /ko -->
+                        <!-- ko if: NoOfProjects() === 0 -->
+                        No project available
+                        <!-- /ko -->
+                    </h3>
+                    @*<div class="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">The Projects  <br class="d-none d-xl-block">atque delectus molestias quis?</div>*@
+                    <div class="form-find text-start mt-40 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                        <form>
+                            <div class="box-industry">
+                                <select class="form-input mr-10 select-active input-industry" data-bind="value: selectedIndustry">
+                                    <option selected>Industry...</option>
+                                    <option value="Tech">Technology</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Health">Healthcare</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Hospitality">Hospitality</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Nonprofit">Non-Profit</option>
+                                    <option value="Retail">Retail</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                </select>
+                            </div>
+                            <select class="form-input mr-10 select-active" data-bind="value: selectedLocation">
+                                <option selected>Location...</option>
+                                <option value="Mombasa">Mombasa</option>
+                                <option value="Kwale">Kwale</option>
+                                <option value="Kilifi">Kilifi</option>
+                                <option value="Tana_river">Tana River</option>
+                                <option value="Lamu">Lamu</option>
+                                <option value="Taita_taveta">Taita-Taveta</option>
+                                <option value="Garissa">Garissa</option>
+                                <option value="Wajir">Wajir</option>
+                                <option value="Mandera">Mandera</option>
+                                <option value="Marsabit">Marsabit</option>
+                                <option value="Isiolo">Isiolo</option>
+                                <option value="Meru">Meru</option>
+                                <option value="Tharaka_nithi">Tharaka-Nithi</option>
+                                <option value="Embu">Embu</option>
+                                <option value="Kitui">Kitui</option>
+                                <option value="Machakos">Machakos</option>
+                                <option value="Makueni">Makueni</option>
+                                <option value="Nyandarua">Nyandarua</option>
+                                <option value="Nyeri">Nyeri</option>
+                                <option value="Kirinyaga">Kirinyaga</option>
+                                <option value="Muranga">Murang'a</option>
+                                <option value="Kiambu">Kiambu</option>
+                                <option value="Turkana">Turkana</option>
+                                <option value="West_pokot">West Pokot</option>
+                                <option value="Samburu">Samburu</option>
+                                <option value="Trans_nzoia">Trans-Nzoia</option>
+                                <option value="Uasin_gishu">Uasin Gishu</option>
+                                <option value="Elgeyo_marakwet">Elgeyo-Marakwet</option>
+                                <option value="Nandi">Nandi</option>
+                                <option value="Baringo">Baringo</option>
+                                <option value="Laikipia">Laikipia</option>
+                                <option value="Nakuru">Nakuru</option>
+                                <option value="Narok">Narok</option>
+                                <option value="Kajiado">Kajiado</option>
+                                <option value="Kericho">Kericho</option>
+                                <option value="Bomet">Bomet</option>
+                                <option value="Kakamega">Kakamega</option>
+                                <option value="Vihiga">Vihiga</option>
+                                <option value="Bungoma">Bungoma</option>
+                                <option value="Busia">Busia</option>
+                                <option value="Siaya">Siaya</option>
+                                <option value="Kisumu">Kisumu</option>
+                                <option value="Homa_bay">Homa Bay</option>
+                                <option value="Migori">Migori</option>
+                                <option value="Kisii">Kisii</option>
+                                <option value="Nyamira">Nyamira</option>
+                                <option value="Nairobi">Nairobi</option>
+                            </select>
+                            <input class="form-input input-keysearch mr-10" type="text" placeholder="Search Project... " readonly>
+                            <a class="btn btn-default btn-find font-sm" data-bind="click: indexSearch">Search</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-box mt-30">
+        <div class="container">
+            <div class="row">
+                @*<div class="col-lg-9 col-md-12 col-sm-12 col-12">*@
+                <div class="content-page">
+                    <div class="box-filters-job">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-5">
+                                <span class="text-small text-showing">
+                                    Showing
+                                    <strong data-bind="text: currentPage() * projectsPerPage() - projectsPerPage() + 1"></strong>-
+                                    <strong data-bind="text: Math.min(currentPage() * projectsPerPage(), AllProjects().length)"></strong>
+                                    of
+                                    <strong data-bind="text: AllProjects().length"></strong>
+                                    Projects
+                                </span>
+                            </div>
+                            <div class="col-xl-6 col-lg-7 text-lg-end mt-sm-15">
+                                <div class="display-flex2">
+                                    <div class="box-border mr-10">
+                                        <span class="text-sortby">Show:</span>
+                                        <div class="dropdown dropdown-sort">
+                                            <button class="btn dropdown-toggle" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                                                <span data-bind="text: projectsPerPage"></span>
+                                                <i class="fi-rr-angle-small-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort">
+                                                <li><a class="dropdown-item" href="#" data-bind="click: function() { projectsPerPage(5); }">5</a></li>
+                                                <li><a class="dropdown-item" href="#" data-bind="click: function() { projectsPerPage(10); }">10</a></li>
+                                                <li><a class="dropdown-item" href="#" data-bind="click: function() { projectsPerPage(12); }">12</a></li>
+                                                <li><a class="dropdown-item" href="#" data-bind="click: function() { projectsPerPage(20); }">20</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="box-border">
+                                        <span class="text-sortby">Sort by:</span>
+                                        <div class="dropdown dropdown-sort">
+                                            <button class="btn dropdown-toggle" id="dropdownSort2" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                                                <span data-bind="text: currentSortOrder"></span>
+                                                <i class="fi-rr-angle-small-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort2">
+                                                <li><a class="dropdown-item" href="#" data-bind="click: function() { currentSortOrder('Newest Project'); }">Newest Project</a></li>
+                                                <li><a class="dropdown-item" href="#" data-bind="click: function() { currentSortOrder('Oldest Project'); }">Oldest Project</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="d-flex justify-content-center">
+                        <div id="alertAreaProjects" class="alert" role="alert" style="display: none;"></div>
+                    </div>*@                    
+                    <div class="row" data-bind="foreach: projectsOnCurrentPage">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="card-grid-2 hover-up">
+                                @*<span class="flash"></span>*@
+                                <div class="ml-100 mt-10">
+                                    <div class="image-box"><img data-bind="attr: { src: CompanyProfileImage }" style="width:50%;height:50%;" alt="Lukurare"></div>
+                                </div>
+                                <div class="card-block-info">
+                                    <h5 class="font-bold"><a href="#" data-bind="text: ProjectName"></a></h5>
+                                    <div class="mt-10 mb-10">
+                                        <span class="card-location" data-bind="text: CompanyLocation"></span>
+                                    </div>
+                                    <div class="card-2-bottom mt-30">
+                                        <div class="row">
+                                            @*<div class="col-lg-7 col-7"><span class="card-text-price">$250</span><span class="text-muted">/Hour</span></div>*@
+                                            <div class="d-flex justify-content-center">
+                                                <a class="btn btn-apply-now" href="#" data-bind="click: function() { $parent.viewPostProject($data, $index()); }">View Project</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="paginations">
+                        <ul class="pager">
+                            <li><a class="pager-prev" href="#"></a></li>
+                            <!-- ko foreach: new Array(Math.ceil(AllProjects().length / projectsPerPage())) -->
+                            <li><a class="pager-number" data-bind="text: $index() + 1, click: function() { $parent.goToPage($index() + 1); }"></a></li>
+                            <!-- /ko -->
+                            <li><a class="pager-next" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                @*<div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                    <div class="sidebar-shadow none-shadow mb-30">
+                        <div class="sidebar-filters">
+                            <div class="filter-block head-border mb-30">
+                                <h5>Advance Filter <a class="link-reset" href="#">Reset</a></h5>
+                            </div>
+                            <div class="filter-block mb-30">
+                                <div class="form-group select-style select-style-icon">
+                                    <select class="form-control form-icons select-active">
+                                        <option value="Mombasa">Mombasa</option>
+                                        <option value="Kwale">Kwale</option>
+                                        <option value="Kilifi">Kilifi</option>
+                                        <option value="Tana_river">Tana River</option>
+                                        <option value="Lamu">Lamu</option>
+                                        <option value="Taita_taveta">Taita-Taveta</option>
+                                        <option value="Garissa">Garissa</option>
+                                        <option value="Wajir">Wajir</option>
+                                        <option value="Mandera">Mandera</option>
+                                        <option value="Marsabit">Marsabit</option>
+                                        <option value="Isiolo">Isiolo</option>
+                                        <option value="Meru">Meru</option>
+                                        <option value="Tharaka_nithi">Tharaka-Nithi</option>
+                                        <option value="Embu">Embu</option>
+                                        <option value="Kitui">Kitui</option>
+                                        <option value="Machakos">Machakos</option>
+                                        <option value="Makueni">Makueni</option>
+                                        <option value="Nyandarua">Nyandarua</option>
+                                        <option value="Nyeri">Nyeri</option>
+                                        <option value="Kirinyaga">Kirinyaga</option>
+                                        <option value="Muranga">Murang'a</option>
+                                        <option value="Kiambu">Kiambu</option>
+                                        <option value="Turkana">Turkana</option>
+                                        <option value="West_pokot">West Pokot</option>
+                                        <option value="Samburu">Samburu</option>
+                                        <option value="Trans_nzoia">Trans-Nzoia</option>
+                                        <option value="Uasin_gishu">Uasin Gishu</option>
+                                        <option value="Elgeyo_marakwet">Elgeyo-Marakwet</option>
+                                        <option value="Nandi">Nandi</option>
+                                        <option value="Baringo">Baringo</option>
+                                        <option value="Laikipia">Laikipia</option>
+                                        <option value="Nakuru">Nakuru</option>
+                                        <option value="Narok">Narok</option>
+                                        <option value="Kajiado">Kajiado</option>
+                                        <option value="Kericho">Kericho</option>
+                                        <option value="Bomet">Bomet</option>
+                                        <option value="Kakamega">Kakamega</option>
+                                        <option value="Vihiga">Vihiga</option>
+                                        <option value="Bungoma">Bungoma</option>
+                                        <option value="Busia">Busia</option>
+                                        <option value="Siaya">Siaya</option>
+                                        <option value="Kisumu">Kisumu</option>
+                                        <option value="Homa_bay">Homa Bay</option>
+                                        <option value="Migori">Migori</option>
+                                        <option value="Kisii">Kisii</option>
+                                        <option value="Nyamira">Nyamira</option>
+                                        <option value="Nairobi">Nairobi</option>
+                                    </select><i class="fi-rr-marker"></i>
+                                </div>
+                            </div>
+                            <div class="filter-block mb-20">
+                                <h5 class="medium-heading mb-15">Industry</h5>
+                                <div class="form-group">
+                                    <ul class="list-checkbox">
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" checked="checked"><span class="text-small">All</span><span class="checkmark"></span>
+                                            </label><span class="number-item">180</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Technology</span><span class="checkmark"></span>
+                                            </label><span class="number-item">12</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">HealthCare</span><span class="checkmark"></span>
+                                            </label><span class="number-item">23</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Marketing</span><span class="checkmark"></span>
+                                            </label><span class="number-item">43</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Engineering</span><span class="checkmark"></span>
+                                            </label><span class="number-item">65</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Education</span><span class="checkmark"></span>
+                                            </label><span class="number-item">76</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Non-Profit</span><span class="checkmark"></span>
+                                            </label><span class="number-item">76</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Retail</span><span class="checkmark"></span>
+                                            </label><span class="number-item">76</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Education</span><span class="checkmark"></span>
+                                            </label><span class="number-item">76</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Entertainment</span><span class="checkmark"></span>
+                                            </label><span class="number-item">76</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="filter-block mb-30">
+                                <h5 class="medium-heading mb-10">Project Posted</h5>
+                                <div class="form-group">
+                                    <ul class="list-checkbox">
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" checked="checked"><span class="text-small">All</span><span class="checkmark"></span>
+                                            </label><span class="number-item">78</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">1 day</span><span class="checkmark"></span>
+                                            </label><span class="number-item">65</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">7 days</span><span class="checkmark"></span>
+                                            </label><span class="number-item">24</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">30 days</span><span class="checkmark"></span>
+                                            </label><span class="number-item">56</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="filter-block mb-20">
+                                <h5 class="medium-heading mb-15">Project type</h5>
+                                <div class="form-group">
+                                    <ul class="list-checkbox">
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Full Time</span><span class="checkmark"></span>
+                                            </label><span class="number-item">25</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" checked="checked"><span class="text-small">Part Time</span><span class="checkmark"></span>
+                                            </label><span class="number-item">64</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Remote Jobs</span><span class="checkmark"></span>
+                                            </label><span class="number-item">78</span>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox"><span class="text-small">Freelancer</span><span class="checkmark"></span>
+                                            </label><span class="number-item">97</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        @*</div>*@
+    </section>
+
+</main>
+
+@section Scripts{
+    <script src="/assets/js/companies/companies.js"></script>
+}

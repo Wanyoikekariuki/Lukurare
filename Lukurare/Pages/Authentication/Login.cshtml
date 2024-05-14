@@ -1,0 +1,122 @@
+﻿@page
+@model SeekersHub.Pages.Authentication.LoginModel
+@{
+    //Layout = "/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Login";
+}
+
+<section class="pt-100 login-register" id="login_section">
+    <div class="container">
+        <div class="row login-register-cover">
+            <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
+                <div class="text-center">
+                    <p class="font-sm text-brand-2">Welcome back! </p>
+                    <h2 class="mt-10 mb-5 text-brand-1">Student Login</h2>
+                </div>
+                <form class="login-register text-start mt-20" action="#">
+                    <div class="form-group">
+                        <label class="form-label" for="input-1">Username</label>
+                        <input class="form-control" id="input-1" type="text" required="" name="fullname" placeholder="Username" data-bind="value:Username">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="input-4">Password *</label>
+                        <div class="input-group">
+                            <input class="form-control" id="input-4" type="password" required="" name="password" placeholder="************" data-bind="value: Password, attr: { type: PasswordVisible() ? 'text' : 'password' }">
+                            <a href="#" class="input-group-addon" id="togglePasswordVisibility" data-bind="click: togglePasswordVisibility">
+                                <i data-bind="css: { 'fa-eye': PasswordVisible(), 'fa-eye-slash': !PasswordVisible() }" class="fa" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="login_footer form-group d-flex justify-content-between">
+                        <label class="cb-container">
+                            <input type="checkbox"><span class="text-small">Remember me</span><span class="checkmark"></span>
+                        </label><a data-bind="click: showInitResetPassword" class='text-muted'>Forgot Password</a>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-brand-1 hover-up w-100" data-bind="click:login" name="login">Login</button>
+                    </div>
+                    <div id="alertArea" class="alert" role="alert" style="display: none;"></div>
+                    <div class="text-muted text-center">Don't have an Account? <a href='/Authentication/Register'>Sign up</a></div>
+                </form>
+            </div>
+            <div class="img-1 d-none d-lg-block"><img class="shape-1" src="/assets/imgs/page/login-register/img-4.svg" alt="JobBox"></div>
+            <div class="img-2"><img src="/assets/imgs/page/login-register/img-3.svg" alt="InternJob-Match"></div>
+        </div>
+    </div>
+</section>
+
+<main class="main">
+    <section class="pt-100 login-register" id="reset_password_section" style="display:none">
+        <div class="container">
+            <div class="row login-register-cover">
+                <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
+                    <div class="text-center">
+                        @*<p class="font-sm text-brand-2">Forgot Password</p>*@
+                        <h2 class="mt-10 mb-5 text-brand-1">Reset Your Password</h2>
+                        <p class="font-sm text-muted mb-30">
+                            Your new password must be different from previously used passwords
+                        </p>
+                    </div>
+                    <form class="login-register text-start mt-20" action="#">
+                        <div class="form-group">
+                            <label class="form-label" for="input-1">OTP code Sent to your email *</label>
+                            <input class="form-control" id="input-1" type="text" required="" name="emaill" placeholder="OTP Code" data-bind="value:OtpCode">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="input-1">New Password *</label>
+                            <input class="form-control" id="input-1" type="text" required="" name="emaill" placeholder="New Password" data-bind="value:Password2">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="input-1">Confirm Password *</label>
+                            <input class="form-control" id="input-1" type="text" required="" name="emaill" placeholder="Confirm Password" data-bind="value:Password12">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-brand-1 hover-up w-100" type="submit" name="continue" data-bind="click:onResetPasswordSubmit">Set New Password</button>
+                        </div>
+                        <div id="alertArea" class="alert" role="alert" style="display: none;"></div>
+                        <div class="text-muted text-center"> <a href='/Companies/CompanyLogin'>Back to Login</a></div>
+                    </form>
+                </div>
+                <div class="img-1 d-none d-lg-block"><img class="shape-1" src="/assets/imgs/page/login-register/img-5.svg" alt="SeekersHub"></div>
+                <div class="img-2"><img src="/assets/imgs/page/login-register/img-3.svg" alt="InternJob-Match"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<main class="main">
+    <section class="pt-100 login-register" id="forgot_password_section" style="display:none">
+        <div class="container">
+            <div class="row login-register-cover">
+                <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
+                    <div class="text-center">
+                        @*<p class="font-sm text-brand-2">Forgot Password</p>*@
+                        <h2 class="mt-10 mb-5 text-brand-1">Forgot Password?</h2>
+                        <p class="font-sm text-muted mb-30">
+                            Enter your username and we'll send you a code to your registered email
+                        </p>
+                    </div>
+                    <form class="login-register text-start mt-20" action="#">
+                        <div class="form-group">
+                            <label class="form-label" for="input-1">Username *</label>
+                            <input class="form-control" id="input-1" type="text" required="" name="email" placeholder="Username" data-bind="value:Username">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-brand-1 hover-up w-100" type="submit" name="continue" data-bind="click:initResetPassword,text:sendOtpRenewText">Send OTP code to my email</button>
+                        </div>
+                        <div id="alertArea" class="alert" role="alert" style="display: none;"></div>
+                        <div class="text-muted text-center"> <a href='/Companies/CompanyLogin'>Back to Login</a></div>
+                    </form>
+                </div>
+                <div class="img-1 d-none d-lg-block"><img class="shape-1" src="/assets/imgs/page/login-register/img-5.svg" alt="InternJob-Match"></div>
+                <div class="img-2"><img src="/assets/imgs/page/login-register/img-3.svg" alt="InternJob-Match"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@section Scripts{
+    <script src="/assets/js/authentication/login.js"></script>
+    <script src="/vendors/leizam/js/kendoHelpers.js"></script>
+    <script src="/vendors/leizam/js/authenticationHelper.js"></script>
+}

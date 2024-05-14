@@ -1,0 +1,546 @@
+﻿@page
+@model SeekersHub.Pages.Admin.CompanyDetailsModel
+@{
+    Layout = "/Pages/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "CandidatesDetails";
+}
+
+<main class="main">
+    <div class="nav">
+        <a class="btn btn-expanded"></a>
+        <nav class="nav-main-menu">
+            <ul class="main-menu">
+                @*<li>
+                        <a class='dashboard2 active' href='index.html'><img src="/Admin/assets/imgs/page/dashboard/dashboard.svg" alt="jobBox"><span class="name">Dashboard</span></a>
+                    </li>*@
+                <li>
+                    <a class='dashboard2 active' href='/Admin/Candidates'><img src="/Admin/assets/imgs/page/dashboard/candidates.svg" alt="SeekersHub"><span class="name">Candidates</span></a>
+                </li>
+                <li>
+                    <a class='dashboard2' href='#'><img src="/Admin/assets/imgs/page/dashboard/recruiters.svg" alt="SeekersHub"><span class="name">Companies</span></a>
+                </li>
+                <li>
+                    <a class='dashboard2' href='/Admin/Projects'><img src="/Admin/assets/imgs/page/dashboard/jobs.svg" alt="SeekersHub"><span class="name">Projects</span></a>
+                </li>
+                @*<li>
+                        <a class='dashboard2' href='my-job-grid.html'><img src="/Admin/assets/imgs/page/dashboard/jobs.svg" alt="jobBox"><span class="name">Projects</span></a>
+                    </li>*@
+
+                <li>
+                    <a class='dashboard2' href='#'><img src="/Admin/assets/imgs/page/dashboard/logout.svg" onclick="logOutUser();" alt="SeekersHub"><span class="name">Logout</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-content-area">
+                <div class="perfect-scroll">
+                    <div class="mobile-search mobile-header-border mb-30">
+                        <div class="text-center"><h3>SeekersHub</h3></div>
+                    </div>
+                    <div class="mobile-menu-wrap mobile-header-border">
+                        <!-- mobile menu start-->
+                        <nav>
+                            <ul class="main-menu">
+                                @*<li>
+                                        <a class='dashboard2 active' href='/Admin/Candidates'><img src="/assets/imgs/page/dashboard/dashboard.svg" alt="SeekersHub"><span class="name">Candidates</span></a>
+                                    </li>*@
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Candidates'><img src="/assets/imgs/page/dashboard/candidates.svg" alt="SeekersHub"><span class="name">Candidates</span></a>
+                                </li>
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Companies'><img src="/assets/imgs/page/dashboard/recruiters.svg" alt="SeekersHub"><span class="name">Companies</span></a>
+                                </li>
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Projects'><img src="/assets/imgs/page/dashboard/jobs.svg" alt="SeekersHub"><span class="name">Projects</span></a>
+                                </li>
+                                @*<li>
+                                        <a class='dashboard2' href='my-tasks-list.html'><img src="assets/imgs/page/dashboard/tasks.svg" alt="jobBox"><span class="name">Tasks List</span></a>
+                                    </li>
+                                    <li>
+                                        <a class='dashboard2' href='profile.html'><img src="assets/imgs/page/dashboard/profiles.svg" alt="jobBox"><span class="name">My Profiles</span></a>
+                                    </li>
+                                    <li>
+                                        <a class='dashboard2' href='my-resume.html'><img src="assets/imgs/page/dashboard/cv-manage.svg" alt="jobBox"><span class="name">CV Manage</span></a>
+                                    </li>
+                                    <li>
+                                        <a class='dashboard2' href='settings.html'><img src="assets/imgs/page/dashboard/settings.svg" alt="jobBox"><span class="name">Setting</span></a>
+                                    </li>
+                                    <li>
+                                        <a class='dashboard2' href='authentication.html'><img src="assets/imgs/page/dashboard/authentication.svg" alt="jobBox"><span class="name">Authentication</span></a>
+                                    </li>*@
+                                <li>
+                                    <a class='dashboard2' href='#'><img src="/assets/imgs/page/dashboard/logout.svg" alt="SeekersHub" onclick="logOutUser();"><span class="name">Logout</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    @*<div class="mobile-account">
+                            <h6 class="mb-10">Your Account</h6>
+                            <ul class="mobile-menu font-heading">
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Work Preferences</a></li>
+                                <li><a href="#">Account Settings</a></li>
+                                <li><a href="#">Go Pro</a></li>
+                                <li><a href="page-signin.html">Sign Out</a></li>
+                            </ul>
+                            <div class="mb-15 mt-15"> <a class='btn btn-default icon-edit hover-up' href='post-job.html'>Post Job</a></div>
+                        </div>*@
+                    <div class="site-copyright">Copyright 2022 &copy; SeekersHub.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ModalApplyJobForm" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content apply-job-form">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body pl-30 pr-30 pt-50">
+                    <div class="text-center">
+                        <p class="font-sm text-brand-2">Projects</p>
+                        <h2 class="mt-10 mb-5 text-brand-1 text-capitalize">Post a Project</h2>
+                        <p class="font-sm text-muted mb-30">Add a specific project that this company has.                   </p>
+                    </div>
+                    <form class="login-register text-start mt-20 pb-30" action="#">
+                        <div class="form-group">
+                            <label class="form-label" for="input-1">Category *</label>
+                            <select class="form-control" id="industry" data-bind="value: projectCategory">
+                                <option selected>Choose...</option>
+                                <option value="Tech">Technology</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Health">Healthcare</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Education">Education</option>
+                                <option value="Hospitality">Hospitality</option>
+                                <option value="Education">Education</option>
+                                <option value="Nonprofit">Non-Profit</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Education">Education</option>
+                                <option value="Entertainment">Entertainment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="number">Project Location</label>
+                            <select class="form-control" id="industry" data-bind="value: projectLocation">
+                                <option selected>Location...</option>
+                                <option value="Mombasa">Mombasa</option>
+                                <option value="Kwale">Kwale</option>
+                                <option value="Kilifi">Kilifi</option>
+                                <option value="Tana_river">Tana River</option>
+                                <option value="Lamu">Lamu</option>
+                                <option value="Taita_taveta">Taita-Taveta</option>
+                                <option value="Garissa">Garissa</option>
+                                <option value="Wajir">Wajir</option>
+                                <option value="Mandera">Mandera</option>
+                                <option value="Marsabit">Marsabit</option>
+                                <option value="Isiolo">Isiolo</option>
+                                <option value="Meru">Meru</option>
+                                <option value="Tharaka_nithi">Tharaka-Nithi</option>
+                                <option value="Embu">Embu</option>
+                                <option value="Kitui">Kitui</option>
+                                <option value="Machakos">Machakos</option>
+                                <option value="Makueni">Makueni</option>
+                                <option value="Nyandarua">Nyandarua</option>
+                                <option value="Nyeri">Nyeri</option>
+                                <option value="Kirinyaga">Kirinyaga</option>
+                                <option value="Muranga">Murang'a</option>
+                                <option value="Kiambu">Kiambu</option>
+                                <option value="Turkana">Turkana</option>
+                                <option value="West_pokot">West Pokot</option>
+                                <option value="Samburu">Samburu</option>
+                                <option value="Trans_nzoia">Trans-Nzoia</option>
+                                <option value="Uasin_gishu">Uasin Gishu</option>
+                                <option value="Elgeyo_marakwet">Elgeyo-Marakwet</option>
+                                <option value="Nandi">Nandi</option>
+                                <option value="Baringo">Baringo</option>
+                                <option value="Laikipia">Laikipia</option>
+                                <option value="Nakuru">Nakuru</option>
+                                <option value="Narok">Narok</option>
+                                <option value="Kajiado">Kajiado</option>
+                                <option value="Kericho">Kericho</option>
+                                <option value="Bomet">Bomet</option>
+                                <option value="Kakamega">Kakamega</option>
+                                <option value="Vihiga">Vihiga</option>
+                                <option value="Bungoma">Bungoma</option>
+                                <option value="Busia">Busia</option>
+                                <option value="Siaya">Siaya</option>
+                                <option value="Kisumu">Kisumu</option>
+                                <option value="Homa_bay">Homa Bay</option>
+                                <option value="Migori">Migori</option>
+                                <option value="Kisii">Kisii</option>
+                                <option value="Nyamira">Nyamira</option>
+                                <option value="Nairobi">Nairobi</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="input-2">Project Details *</label>
+                            <textarea class="form-control" id="input-2" data-bind="value: projectDetails"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="number">Post As *</label>
+                            <select class="form-control" id="industry" data-bind="value: postAs">
+                                <option selected>Choose...</option>
+                                <option value="Internship">Internship</option>
+                                <option value="Job">Job</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="des">Name of Project</label>
+                            <input class="form-control" id="des" type="text" required="" name="Description" placeholder="Tarmacking of Kisii-Keroka Road" data-bind="value: projectName">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="des">Expected Start Date</label>
+                            <input type="datetime-local" id="startDate" class="form-control" data-bind="value: projectStart">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="des">Expected End Date</label>
+                            <input type="datetime-local" id="startDate" class="form-control" data-bind="value: projectEnd">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="des">No of Open positions</label>
+                            <input type="number" id="openPositions" class="form-control" data-bind="value: openPosition">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="input-2">Recommended For *</label>
+                            <textarea class="form-control" id="input-2" placeholder="Civil Engineering student, Building and Construction Students, Project Management Students" data-bind="value: projectRecommendation"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="input-2">Scope of Work *</label>
+                            <textarea class="form-control" id="input-2" data-bind="value: workScope"></textarea>
+                        </div>
+                        <div id="alertArea" class="alert" role="alert" style="display: none;"></div>
+                        <div class="form-group">
+                            <button class="btn btn-default hover-up w-100" type="submit" name="login" data-bind="click: submitPostProject">Post Project</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-content">
+        <div class="box-heading">
+            <div class="box-title">
+                <h3 class="mb-35">Company Details</h3>
+            </div>
+            <div class="box-breadcrumb">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li> <a class='icon-home' href='/Admin/Candidates'>Admin</a></li>
+                        <li><span>Company Details</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-box">
+                    <div class="container">
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <button type="button" class="btn btn-default btn-brand icon-tick" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
+                                    Add Project
+                                </button>
+                                <div class="row mt-30">
+                                    <div class="col-lg-12 mb-4">
+                                        <!-- New Card for Personal Information -->
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3 class="icon-edu">Company Information</h3>
+                                                <div class="justify-content-end d-flex align-items-center mt--30" style="float:right">
+                                                    <img data-bind="attr: { src: EntityProfileImage }" style="width:100px; height:100px; border-radius:70%"
+                                                         card-img-top profile-img" alt="Profile Image">
+                                                </div>
+                                                <h6 class="card-subtitle mb-2 mt-5 text-muted">Company Name</h6>
+                                                <p class="card-text" data-bind="text: EntityName"></p>
+                                                <h6 class="card-subtitle mb-2 text-muted">Email Adress</h6>
+                                                <p class="card-text" data-bind="text: EntityEmail"></p>
+                                                <h6 class="card-subtitle mb-2 text-muted">Contact Number</h6>
+                                                <p class="card-text" data-bind="text: EntityPhone"></p>
+                                                <h6 class="card-subtitle mb-2 text-muted">Address</h6>
+                                                <p class="card-text" data-bind="text: Location"></p>
+                                                <h6 class="card-subtitle mb-2 mt-5 text-muted">Industry Sector</h6>
+                                                <p class="card-text" data-bind="text: CompanySector"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <h3 class="icon-edu">Company Overview</h3>
+                                <h6 class="color-brand-1 mb-20 mt-5">Mission Statement</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: mission"></p>
+                                <h6 class="color-brand-1 mb-20">Vision</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: vision"></p>
+                                <h6 class="color-brand-1 mb-20">Core Values</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: coreValues"></p>
+                                <h6 class="color-brand-1 mb-20">History and Background</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: history"></p>
+
+                            </div>
+                        </div>
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <h3 class="icon-edu">Projects and Initiatives</h3>
+                                <h6 class="color-brand-1 mb-20 mt-5">Description of Ongoing Projects</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: ongoingProjects"></p>
+                                <h6 class="color-brand-1 mb-20">Past Projects Completed</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: pastProjects"></p>
+                                <h6 class="color-brand-1 mb-20">Technologies or Tools Used</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: projectTechnologies"></p>
+
+
+                            </div>
+                        </div>
+
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <div class="row mt-30">
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Core Competencies</h5>
+                                                <h6 class="card-subtitle mb-2 mt-5 text-muted">Areas of Expertise</h6>
+                                                <p class="card-text" data-bind="text: expertise"></p>
+                                                <h6 class="card-subtitle mb-2 text-muted">Specializations</h6>
+                                                <p class="card-text" data-bind="text: specialization"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <!-- New Card for Personal Information -->
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Internship Type</h5>
+                                                <h6 class="card-subtitle mb-2 mt-5 text-muted">Internship Type that We Offer</h6>
+                                                <p class="card-text" data-bind="text: internships"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <h3 class="icon-edu">Company Culture</h3>
+                                <h6 class="color-brand-1 mb-20 mt-5">Work Environment</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: workEnvironment"></p>
+                                <h6 class="color-brand-1 mb-20">Company Values and Culture</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: companyValues"></p>
+                            </div>
+                        </div>
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <h3 class="icon-edu">Technological Capabilities</h3>
+                                <h6 class="color-brand-1 mb-20 mt-5">Technologies Used or Developed</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: usedTechnologies"></p>
+                                <h6 class="color-brand-1 mb-20">Innovation Initiatives</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: innovation"></p>
+                            </div>
+                        </div>
+
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <h3 class="icon-edu">Corporate Social Responsibility (CSR)</h3>
+                                <h6 class="color-brand-1 mb-20 mt-5">CSR Initiatives or Programs</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: programs"></p>
+                                <h6 class="color-brand-1 mb-20">Environmental Sustainability Efforts</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: environmentalEfforts"></p>
+                            </div>
+                        </div>
+
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <h3 class="icon-edu">Awards and Recognition</h3>
+                                <h6 class="color-brand-1 mb-20 mt-5">Industry Awards</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: awards"></p>
+                                <h6 class="color-brand-1 mb-20">Certifications</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: certifications"></p>
+                            </div>
+                        </div>
+
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <h3 class="icon-edu">Career Opportunities</h3>
+                                <h6 class="color-brand-1 mb-20 mt-5">Internship Programs</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: internshipPrograms"></p>
+                                <h6 class="color-brand-1 mb-20">Job Openings</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: jobs"></p>
+                                <h6 class="color-brand-1 mb-20">Opportunities for Career Growth and Development</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: careerOpportunities"></p>
+                            </div>
+                        </div>
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <h3 class="icon-edu">Preferred Intern Profile</h3>
+                                <h6 class="color-brand-1 mb-20 mt-5">Desired Skills and Qualifications in Interns</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: desiredSkill"></p>
+                                <h6 class="color-brand-1 mb-20">Characteristics or Traits sought in Interns</h6>
+                                <p class="color-text-paragraph-2 mb-15" data-bind="text: internsTraits"></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-box">
+                                    <div class="container">
+                                        <div class="panel-white mb-30">
+                                            <div class="box-padding">
+                                                <h5 class="icon-edu">Education</h5>
+                                                <div class="row mt-30">
+                                                    <div class="col-lg-9">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="form-group mb-30">
+                                                                    <label class="font-sm color-text-mutted mb-10">From</label>
+                                                                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" data-date="17 September 2022" value="2022-09-20" placeholder="12 September 2008">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="form-group mb-30">
+                                                                    <label class="font-sm color-text-mutted mb-10">To</label>
+                                                                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" data-date="17 September 2022" value="2022-09-20" placeholder="12 September 2008">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-30">
+                                                                    <label class="font-sm color-text-mutted mb-10">Description</label>
+                                                                    <textarea class="form-control" name="message" rows="5"> Product Designer - Spotify Inc.
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante
+                ipsum primis in faucibus.</textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mt-10">
+                                                                    <button class="btn btn-default btn-brand icon-tick">Add Timeline</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-timeline mt-50">
+                                                            <div class="item-timeline">
+                                                                <div class="timeline-year"> <span>2008 - 2012</span></div>
+                                                                <div class="timeline-info">
+                                                                    <h5 class="color-brand-1 mb-20">National Design Academy</h5>
+                                                                    <p class="color-text-paragraph-2 mb-15">Lorem ipsum dolor sit amet, consectetur dipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                                                </div>
+                                                                <div class="timeline-actions"> <a class="btn btn-editor"></a><a class="btn btn-remove"></a></div>
+                                                            </div>
+                                                            <div class="item-timeline">
+                                                                <div class="timeline-year"> <span>2012 - 2014</span></div>
+                                                                <div class="timeline-info">
+                                                                    <h5 class="color-brand-1 mb-20">University of Oxford</h5>
+                                                                    <p class="color-text-paragraph-2 mb-15">Lorem ipsum dolor sit amet, consectetur dipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                                                </div>
+                                                                <div class="timeline-actions"> <a class="btn btn-editor"></a><a class="btn btn-remove"></a></div>
+                                                            </div>
+                                                            <div class="item-timeline">
+                                                                <div class="timeline-year"> <span>2014 - 2016</span></div>
+                                                                <div class="timeline-info">
+                                                                    <h5 class="color-brand-1 mb-20">California Institute of Technology</h5>
+                                                                    <p class="color-text-paragraph-2 mb-15">Lorem ipsum dolor sit amet, consectetur dipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                                                </div>
+                                                                <div class="timeline-actions"> <a class="btn btn-editor"></a><a class="btn btn-remove"></a></div>
+                                                            </div>
+                                                            <div class="item-timeline">
+                                                                <div class="timeline-year"> <span>2016 - Now</span></div>
+                                                                <div class="timeline-info">
+                                                                    <h5 class="color-brand-1 mb-20">Stanford University</h5>
+                                                                    <p class="color-text-paragraph-2 mb-15">Lorem ipsum dolor sit amet, consectetur dipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                                                </div>
+                                                                <div class="timeline-actions"> <a class="btn btn-editor"></a><a class="btn btn-remove"></a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-white mb-30">
+                                            <div class="box-padding">
+                                                <h5 class="icon-edu">Work & Experience</h5>
+                                                <div class="row mt-30">
+                                                    <div class="col-lg-9">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="form-group mb-30">
+                                                                    <label class="font-sm color-text-mutted mb-10">From</label>
+                                                                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" data-date="17 September 2022" value="2022-09-20" placeholder="12 September 2008">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="form-group mb-30">
+                                                                    <label class="font-sm color-text-mutted mb-10">To</label>
+                                                                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" data-date="17 September 2022" value="2022-09-20" placeholder="12 September 2008">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mb-30">
+                                                                    <label class="font-sm color-text-mutted mb-10">Description</label>
+                                                                    <textarea class="form-control" name="message" rows="5"> Product Designer - Spotify Inc.
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante
+                ipsum primis in faucibus.</textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group mt-10">
+                                                                    <button class="btn btn-default btn-brand icon-tick">Add Timeline</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-timeline mt-50">
+                                                            <div class="item-timeline">
+                                                                <div class="timeline-year"> <span>2008 - 2012</span></div>
+                                                                <div class="timeline-info">
+                                                                    <h5 class="color-brand-1 mb-20">Samoo Architects &amp; Engineers</h5>
+                                                                    <p class="color-text-paragraph-2 mb-15">Lorem ipsum dolor sit amet, consectetur dipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                                                </div>
+                                                                <div class="timeline-actions"> <a class="btn btn-editor"></a><a class="btn btn-remove"></a></div>
+                                                            </div>
+                                                            <div class="item-timeline">
+                                                                <div class="timeline-year"> <span>2012 - 2014</span></div>
+                                                                <div class="timeline-info">
+                                                                    <h5 class="color-brand-1 mb-20">Foster &amp; Partners</h5>
+                                                                    <p class="color-text-paragraph-2 mb-15">Lorem ipsum dolor sit amet, consectetur dipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                                                </div>
+                                                                <div class="timeline-actions"> <a class="btn btn-editor"></a><a class="btn btn-remove"></a></div>
+                                                            </div>
+                                                            <div class="item-timeline">
+                                                                <div class="timeline-year"> <span>2014 - 2016</span></div>
+                                                                <div class="timeline-info">
+                                                                    <h5 class="color-brand-1 mb-20">Skidmore Owings &amp; Merrill</h5>
+                                                                    <p class="color-text-paragraph-2 mb-15">Lorem ipsum dolor sit amet, consectetur dipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                                                </div>
+                                                                <div class="timeline-actions"> <a class="btn btn-editor"></a><a class="btn btn-remove"></a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+
+
+
+
+        </div>
+    </div>
+</main>
+
+@section Scripts{
+    <script src="/assets/js/companies/companies.js"></script>
+}

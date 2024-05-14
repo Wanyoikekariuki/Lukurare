@@ -1,0 +1,250 @@
+﻿@page
+@model SeekersHub.Pages.Admin.ApplicationDetailsModel
+@{
+    Layout = "/Pages/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Candidates";
+}
+<main class="main">
+    <div class="nav">
+        <a class="btn btn-expanded"></a>
+        <nav class="nav-main-menu">
+            <ul class="main-menu">
+                @*<li>
+                        <a class='dashboard2 active' href='index.html'><img src="/Admin/assets/imgs/page/dashboard/dashboard.svg" alt="jobBox"><span class="name">Dashboard</span></a>
+                    </li>*@
+                <li>
+                    <a class='dashboard2 active' href='/Admin/Candidates'><img src="/Admin/assets/imgs/page/dashboard/candidates.svg" alt="SeekersHub"><span class="name">Candidates</span></a>
+                </li>
+                <li>
+                    <a class='dashboard2' href='/Admin/Companies'><img src="/Admin/assets/imgs/page/dashboard/recruiters.svg" alt="SeekersHub"><span class="name">Companies</span></a>
+                </li>
+                <li>
+                    <a class='dashboard2' href='/Admin/Projects'><img src="/Admin/assets/imgs/page/dashboard/jobs.svg" alt="SeekersHub"><span class="name">Projects</span></a>
+                </li>
+                <li>
+                    <a class='dashboard2' href='/Admin/Applications'><img src="/Admin/assets/imgs/page/dashboard/jobs.svg" alt="SeekersHub"><span class="name">Applications</span></a>
+                </li>
+                @*<li>
+                        <a class='dashboard2' href='my-tasks-list.html'><img src="/Admin/assets/imgs/page/dashboard/tasks.svg" alt="jobBox"><span class="name">Tasks List</span></a>
+                    </li>
+                    <li>
+                        <a class='dashboard2' href='profile.html'><img src="/Admin/assets/imgs/page/dashboard/profiles.svg" alt="jobBox"><span class="name">My Profiles</span></a>
+                    </li>
+                    <li>
+                        <a class='dashboard2' href='my-resume.html'><img src="/Admin/assets/imgs/page/dashboard/cv-manage.svg" alt="jobBox"><span class="name">CV Manage</span></a>
+                    </li>
+                    <li>
+                        <a class='dashboard2' href='settings.html'><img src="/Admin/assets/imgs/page/dashboard/settings.svg" alt="jobBox"><span class="name">Setting</span></a>
+                    </li>
+                    <li>
+                        <a class='dashboard2' href='authentication.html'><img src="/Admin/assets/imgs/page/dashboard/authentication.svg" alt="jobBox"><span class="name">Authentication</span></a>
+                    </li>*@
+                <li>
+                    <a class='dashboard2' href='#'><img src="/Admin/assets/imgs/page/dashboard/logout.svg" alt="SeekersHub" onclick="logOutUser();"><span class="name">Logout</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-content-area">
+                <div class="perfect-scroll">
+                    <div class="mobile-search mobile-header-border mb-30">
+                        <div class="text-center"><h3>SeekersHub</h3></div>
+                    </div>
+                    <div class="mobile-menu-wrap mobile-header-border">
+                        <!-- mobile menu start-->
+                        <nav>
+                            <ul class="main-menu">
+                                @*<li>
+                                        <a class='dashboard2 active' href='/Admin/Candidates'><img src="/assets/imgs/page/dashboard/dashboard.svg" alt="SeekersHub"><span class="name">Candidates</span></a>
+                                    </li>*@
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Candidates'><img src="/assets/imgs/page/dashboard/candidates.svg" alt="SeekersHub"><span class="name">Candidates</span></a>
+                                </li>
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Companies'><img src="/assets/imgs/page/dashboard/recruiters.svg" alt="SeekersHub"><span class="name">Companies</span></a>
+                                </li>
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Projects'><img src="/assets/imgs/page/dashboard/jobs.svg" alt="SeekersHub"><span class="name">Projects</span></a>
+                                </li>
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Applications'><img src="/assets/imgs/page/dashboard/tasks.svg" alt="SeekersHub"><span class="name">Applications</span></a>
+                                </li>
+                                @*<li>
+                                        <a class='dashboard2' href='my-tasks-list.html'><img src="assets/imgs/page/dashboard/tasks.svg" alt="jobBox"><span class="name">Tasks List</span></a>
+                                    </li>
+                                    <li>
+                                        <a class='dashboard2' href='profile.html'><img src="assets/imgs/page/dashboard/profiles.svg" alt="jobBox"><span class="name">My Profiles</span></a>
+                                    </li>
+                                    <li>
+                                        <a class='dashboard2' href='my-resume.html'><img src="assets/imgs/page/dashboard/cv-manage.svg" alt="jobBox"><span class="name">CV Manage</span></a>
+                                    </li>
+                                    <li>
+                                        <a class='dashboard2' href='settings.html'><img src="assets/imgs/page/dashboard/settings.svg" alt="jobBox"><span class="name">Setting</span></a>
+                                    </li>
+                                    <li>
+                                        <a class='dashboard2' href='authentication.html'><img src="assets/imgs/page/dashboard/authentication.svg" alt="jobBox"><span class="name">Authentication</span></a>
+                                    </li>*@
+                                <li>
+                                    <a class='dashboard2' href='#'><img src="/assets/imgs/page/dashboard/logout.svg" alt="SeekersHub" onclick="logOutUser();"><span class="name">Logout</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    @*<div class="mobile-account">
+                            <h6 class="mb-10">Your Account</h6>
+                            <ul class="mobile-menu font-heading">
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Work Preferences</a></li>
+                                <li><a href="#">Account Settings</a></li>
+                                <li><a href="#">Go Pro</a></li>
+                                <li><a href="page-signin.html">Sign Out</a></li>
+                            </ul>
+                            <div class="mb-15 mt-15"> <a class='btn btn-default icon-edit hover-up' href='post-job.html'>Post Job</a></div>
+                        </div>*@
+                    <div class="site-copyright">Copyright 2022 &copy; SeekersHub.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-content">
+        <div class="box-heading">
+            <div class="box-title">
+                <h3 class="mb-35">Application Details</h3>
+            </div>
+            <div class="box-breadcrumb">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li> <a class='icon-home' href='#'>Admin</a></li>
+                        <li><span>Application Details</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-box">
+                    <div class="container">
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+
+                                <section class="section-box mt-50">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                                                <div class="box-border-single">
+                                                    <div class="row mt-5">
+                                                        <div class="col-lg-8 col-md-12">
+                                                            <h3 data-bind="text: ApplicationProjectName"></h3>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-12 text-lg-end d-flex justify-content-between">
+                                                            <a class="btn btn-default mr-10" data-bind="click: acceptApplication">Accept</a>
+                                                            <a class="btn btn-danger" data-bind="click: rejectApplication">Reject</a>
+                                                        </div>
+                                                        <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        @*<h5 class="modal-title" id="alertModalLabel">Application Status</h5>*@
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body" id="alertModalBody">
+                                                                        <!-- The alert message will be inserted here -->
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                  
+                                                    <div class="mt-15">
+                                                            <div class="panel-white">
+                                                                <div class="job-overview">
+                                                                    <div class="border-bottom pb-15 mb-30">
+                                                                        <h5 class="ml-200 mt-5">Project Details</h5>
+                                                                    </div>                                                                    
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 d-flex ml-4">
+                                                                            <div class="sidebar-icon-item"><img src="/assets/imgs/page/job-single/industry.svg" alt="SeekersHub"></div>
+                                                                            <div class="sidebar-text-info ml-10"><span class="text-description industry-icon mb-10">Project Category</span><strong class="small-heading ml-10" data-bind="text: ApplicationProjectCategory"></strong></div>
+                                                                        </div>
+                                                                        <div class="col-md-6 d-flex mt-sm-15 mb-15">
+                                                                            <div class="sidebar-icon-item"><img src="/assets/imgs/page/job-single/job-level.svg" alt="SeekersHub"></div>
+                                                                            <div class="sidebar-text-info ml-10"><span class="text-description joblevel-icon mb-10">Recommendation</span><strong class="small-heading ml-10" data-bind="text: ApplicationProjectRecommendation"></strong></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-25">
+                                                                        <div class="col-md-6 d-flex mt-sm-15 ml-4">
+                                                                            <div class="sidebar-icon-item"><img src="/assets/imgs/page/job-single/salary.svg" alt="SeekersHub"></div>
+                                                                            <div class="sidebar-text-info ml-10"><span class="text-description salary-icon mb-10">Project Start Date</span><strong class="small-heading ml-10" data-bind="text: ApplicationProjectStart"></strong></div>
+                                                                        </div>
+                                                                        <div class="col-md-6 d-flex mb-15">
+                                                                            <div class="sidebar-icon-item"><img src="/assets/imgs/page/job-single/experience.svg" alt="SeekersHub"></div>
+                                                                            <div class="sidebar-text-info ml-10"><span class="text-description experience-icon mb-10">Project End Date</span><strong class="small-heading ml-10" data-bind="text: ApplicationProjectEnd"></strong></div>
+                                                                        </div>
+                                                                   </div>
+                                                               
+                                                                    </div>
+                                                        </div>
+                                                        </div>
+                                                                <div class="content-single">
+                                                                    <h4 class="mt-15">ProjectDetails</h4>
+                                                                    <p class="mt-10" data-bind="html: ApplicationProjectDetails"></p>
+                                                                    <h4 class="mt-15">Work Scope</h4>
+                                                                    <p class="mt-10" data-bind="html: ApplicationProjectWorkScope"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xxl-3 col-xl-4 col-lg-4">
+                                                            <div class="section-box">
+                                                                <div class="container">
+                                                                    <div class="panel-white">
+                                                                        <div class="panel-head">
+                                                                            <div class="sidebar-border">
+                                                                                <div class="sidebar-heading">
+                                                                                   <div class="border-bottom pb-15 mb-20">
+                                                                                        <div class="avatar-sidebar">
+                                                                                            <h5>Candidate Details</h5>                                                                                        
+                                                                                        </div>
+                                                                                       </div>
+                                                                                    </div>
+                                                                                    <div class="sidebar-list-job">
+                                                                                        <ul class="ul-disc">
+                                                                                            <li><h6>Candidate Name: </h6><span data-bind="text: ApplicationCandidate"></span></li>
+                                                                                            <li><h6>Candidate Email: </h6><span data-bind="text: ApplicationCandidateEmail"></span></li>
+                                                                                            <li><h6>Candidate Location: </h6><span data-bind="text: ApplicationCandidateLocation"></span></li>
+                                                                                            <li><h6>Candidate Phone Number: </h6><span data-bind="text: ApplicationCandidatePhone"></span></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                </section>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</main>
+@section Scripts{
+    <script src="/assets/js/candidates/candidates.js"></script>
+}

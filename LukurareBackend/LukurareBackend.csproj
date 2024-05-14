@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\Student\" />
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="EPPlus" Version="5.7.5" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+
+
+    <PackageReference Include="EPPlus" Version="5.7.5" />
+
+
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
+
+
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.8" />
+
+
+    <PackageReference Include="MySqlConnector" Version="2.3.6" />
+
+
+    <PackageReference Include="RestSharp" Version="106.12.0" />
+
+
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
+
+
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    
+    
+    <ProjectReference Include="..\Authentication\Authentication.csproj" />
+    
+    
+    <ProjectReference Include="..\CommunicationLibrary\CommunicationLibrary.csproj" />
+    
+    
+    <ProjectReference Include="..\EFDatabaseModel\EFDatabaseModel.csproj" />
+    
+    
+    <ProjectReference Include="..\ProjectBase\ProjectBase.csproj" />
+  </ItemGroup>
+
+
+
+</Project>

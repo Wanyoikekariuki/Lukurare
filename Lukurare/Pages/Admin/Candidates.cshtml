@@ -1,0 +1,260 @@
+﻿@page
+@model SeekersHub.Pages.Admin.CandidatesModel
+@{
+    Layout = "/Pages/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Candidates";
+}
+<main class="main">
+    <div class="nav">
+        <a class="btn btn-expanded"></a>
+        <nav class="nav-main-menu">
+            <ul class="main-menu">
+                @*<li>
+            <a class='dashboard2 active' href='index.html'><img src="/Admin/assets/imgs/page/dashboard/dashboard.svg" alt="jobBox"><span class="name">Dashboard</span></a>
+        </li>*@
+                <li>
+                    <a class='dashboard2 active' href='/Admin/Candidates'><img src="/Admin/assets/imgs/page/dashboard/candidates.svg" alt="SeekersHub"><span class="name">Candidates</span></a>
+                </li>
+                <li>
+                    <a class='dashboard2' href='/Admin/Companies'><img src="/Admin/assets/imgs/page/dashboard/recruiters.svg" alt="SeekersHub"><span class="name">Companies</span></a>
+                </li>
+                <li>
+                    <a class='dashboard2' href='/Admin/Projects'><img src="/Admin/assets/imgs/page/dashboard/jobs.svg" alt="SeekersHub"><span class="name">Projects</span></a>
+                </li>
+                <li>
+                    <a class='dashboard2' href='/Admin/Applications'><img src="/Admin/assets/imgs/page/dashboard/tasks.svg" alt="SeekersHub"><span class="name">Applications</span></a>
+                </li>
+                @*<li>
+            <a class='dashboard2' href='my-tasks-list.html'><img src="/Admin/assets/imgs/page/dashboard/tasks.svg" alt="jobBox"><span class="name">Tasks List</span></a>
+        </li>
+        <li>
+            <a class='dashboard2' href='profile.html'><img src="/Admin/assets/imgs/page/dashboard/profiles.svg" alt="jobBox"><span class="name">My Profiles</span></a>
+        </li>
+        <li>
+            <a class='dashboard2' href='my-resume.html'><img src="/Admin/assets/imgs/page/dashboard/cv-manage.svg" alt="jobBox"><span class="name">CV Manage</span></a>
+        </li>
+        <li>
+            <a class='dashboard2' href='settings.html'><img src="/Admin/assets/imgs/page/dashboard/settings.svg" alt="jobBox"><span class="name">Setting</span></a>
+        </li>
+        <li>
+            <a class='dashboard2' href='authentication.html'><img src="/Admin/assets/imgs/page/dashboard/authentication.svg" alt="jobBox"><span class="name">Authentication</span></a>
+        </li>*@
+                <li>
+                    <a class='dashboard2' onclick="logOutUser();"><img src="/Admin/assets/imgs/page/dashboard/logout.svg" alt="SeekersHub"><span class="name">Logout</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-content-area">
+                <div class="perfect-scroll">
+                    <div class="mobile-search mobile-header-border mb-30">
+                        <div class="text-center"><h3>SeekersHub</h3></div>
+                    </div>
+                    <div class="mobile-menu-wrap mobile-header-border">
+                        <!-- mobile menu start-->
+                        <nav>
+                            <ul class="main-menu">
+                                @*<li>
+            <a class='dashboard2 active' href='/Admin/Candidates'><img src="/assets/imgs/page/dashboard/dashboard.svg" alt="SeekersHub"><span class="name">Candidates</span></a>
+        </li>*@
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Candidates'><img src="/assets/imgs/page/dashboard/candidates.svg" alt="SeekersHub"><span class="name">Candidates</span></a>
+                                </li>
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Companies'><img src="/assets/imgs/page/dashboard/recruiters.svg" alt="SeekersHub"><span class="name">Companies</span></a>
+                                </li>
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Projects'><img src="/assets/imgs/page/dashboard/jobs.svg" alt="SeekersHub"><span class="name">Projects</span></a>
+                                </li>
+                                <li>
+                                    <a class='dashboard2' href='/Admin/Applications'><img src="/assets/imgs/page/dashboard/tasks.svg" alt="SeekersHub"><span class="name">Applications</span></a>
+                                </li>
+                                @*<li>
+            <a class='dashboard2' href='my-tasks-list.html'><img src="assets/imgs/page/dashboard/tasks.svg" alt="jobBox"><span class="name">Tasks List</span></a>
+        </li>
+        <li>
+            <a class='dashboard2' href='profile.html'><img src="assets/imgs/page/dashboard/profiles.svg" alt="jobBox"><span class="name">My Profiles</span></a>
+        </li>
+        <li>
+            <a class='dashboard2' href='my-resume.html'><img src="assets/imgs/page/dashboard/cv-manage.svg" alt="jobBox"><span class="name">CV Manage</span></a>
+        </li>
+        <li>
+            <a class='dashboard2' href='settings.html'><img src="assets/imgs/page/dashboard/settings.svg" alt="jobBox"><span class="name">Setting</span></a>
+        </li>
+        <li>
+            <a class='dashboard2' href='authentication.html'><img src="assets/imgs/page/dashboard/authentication.svg" alt="jobBox"><span class="name">Authentication</span></a>
+        </li>*@
+                                <li>
+                                    <a class='dashboard2' href='#'><img src="/assets/imgs/page/dashboard/logout.svg" alt="SeekersHub" onclick="logOutUser();"><span class="name">Logout</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    @*<div class="mobile-account">
+                            <h6 class="mb-10">Your Account</h6>
+                            <ul class="mobile-menu font-heading">
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Work Preferences</a></li>
+                                <li><a href="#">Account Settings</a></li>
+                                <li><a href="#">Go Pro</a></li>
+                                <li><a href="page-signin.html">Sign Out</a></li>
+                            </ul>
+                            <div class="mb-15 mt-15"> <a class='btn btn-default icon-edit hover-up' href='post-job.html'>Post Job</a></div>
+                        </div>*@
+                    <div class="site-copyright">Copyright 2022 &copy; SeekersHub.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-content">
+        <div class="box-heading">
+            <div class="box-title">
+                <h3 class="mb-35">Candidates</h3>
+            </div>
+            <div class="box-breadcrumb">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li> <a class='icon-home' href='index.html'>Admin</a></li>
+                        <li><span>Candidates</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-box">
+                    <div class="container">
+                        <div class="panel-white mb-30">
+                            <div class="box-padding">
+                                <div class="row mb-30">
+                                    <div class="col-12">
+                                        <div class="box-list-character">
+                                            <ul>
+                                                <li><a class="active" href="#">A</a></li>
+                                                <li><a href="#">B</a></li>
+                                                <li><a href="#">C</a></li>
+                                                <li><a href="#">D</a></li>
+                                                <li><a href="#">E</a></li>
+                                                <li><a href="#">F</a></li>
+                                                <li><a href="#">G</a></li>
+                                                <li><a href="#">H</a></li>
+                                                <li><a href="#">I</a></li>
+                                                <li><a href="#">J</a></li>
+                                                <li><a href="#">K</a></li>
+                                                <li><a href="#">L</a></li>
+                                                <li><a href="#">M</a></li>
+                                                <li><a href="#">N</a></li>
+                                                <li><a href="#">O</a></li>
+                                                <li><a href="#">P</a></li>
+                                                <li><a href="#">Q</a></li>
+                                                <li><a href="#">R</a></li>
+                                                <li><a href="#">S</a></li>
+                                                <li><a href="#">T</a></li>
+                                                <li><a href="#">U</a></li>
+                                                <li><a href="#">V</a></li>
+                                                <li><a href="#">W</a></li>
+                                                <li><a href="#">X</a></li>
+                                                <li><a href="#">Y</a></li>
+                                                <li><a href="#">Z</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-5">
+                                        <span class="text-small text-showing">
+                                            Showing
+                                            <strong data-bind="text: currentPage() * candidatesPerPage() - candidatesPerPage() + 1"></strong>-
+                                            <strong data-bind="text: Math.min(currentPage() * candidatesPerPage(), Candidates().length)"></strong>
+                                            of
+                                            <strong data-bind="text: Candidates().length"></strong>
+                                            Candidates
+                                        </span>
+                                    </div>                                    
+                                    <div class="col-xl-6 col-lg-7 text-lg-end mt-sm-15">
+                                        <div class="display-flex2">
+                                            <div class="box-border mr-10">
+                                                <span class="text-sortby">Show:</span>
+                                                <div class="dropdown dropdown-sort">
+                                                    <button class="btn dropdown-toggle" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                                                        <span data-bind="text: candidatesPerPage"></span>
+                                                    <i class="fi-rr-angle-small-down"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort">
+                                                        <li><a class="dropdown-item" href="#" data-bind="click: function() { candidatesPerPage(4); }">4</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-bind="click: function() { candidatesPerPage(12); }">12</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-bind="click: function() { candidatesPerPage(20); }">20</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-bind="click: function() { candidatesPerPage(28); }">28</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @*<div class="box-border">
+                                                <span class="text-sortby">Sort by:</span>
+                                                <div class="dropdown dropdown-sort">
+                                                    <button class="btn dropdown-toggle" id="dropdownSort2" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"><span>Newest Post</span><i class="fi-rr-angle-small-down"></i></button>
+                                                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort2">
+                                                        <li><a class="dropdown-item active" href="#">Newest Post</a></li>
+                                                        <li><a class="dropdown-item" href="#">Oldest Post</a></li>
+                                                        <li><a class="dropdown-item" href="#">Rating Post</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>*@
+                                            <div class="box-view-type"><a class='view-type' href='#'><img src="assets/imgs/template/icons/icon-list.svg" alt="jobBox"></a><a class='view-type' href='#'><img src="assets/imgs/template/icons/icon-grid-hover.svg" alt="SeekersHub"></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" data-bind="foreach: candidatesOnCurrentPage">
+                                    <div class="col-xl-3 col-lg-4 col-md-6">
+                                        <div class="card-grid-2 hover-up">
+                                            <div class="card-grid-2-image-left">
+                                                <div class="card-grid-2-image-rd online">
+                                                    <a href="#">
+                                                        <figure><img alt="SeekersHub" data-bind="attr: { src: CandidateProfileImage }"></figure>
+                                                    </a>
+                                                </div>
+                                                <div class="card-profile pt-10">
+                                                    <a href="#">
+                                                        <h6 data-bind="text: CandidateName"></h6>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="card-block-info">
+                                                <div class="employers-info align-items-center justify-content-center mt-15">
+                                                    <div class="row">
+                                                        <div class="col-12"><span class="d-flex align-items-center"><i class="fi-rr-marker mr-5 ml-0"></i><span class="font-sm color-text-mutted" data-bind="text: CandidateLocation"></span></span></div>
+                                                    </div>
+                                                </div>
+                                                <div data-bind="attr: { id: 'alertArea' + $index() }" class="alert" role="alert" style="display: none;"></div>
+                                                <div class="d-flex justify-content-center mt-3">
+                                                    <a href="#" data-bind="click: function() { $parent.viewProfile($data, $index()); }" class="btn btn-primary" style="color: white;">View Profile</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="paginations">
+                                    <ul class="pager">                                        
+                                        <li><a class="pager-prev" href="#"></a></li>
+                                        <!-- ko foreach: new Array(Math.ceil(Candidates().length / candidatesPerPage())) -->
+                                        <li><a class="pager-number" data-bind="text: $index() + 1, click: function() { $parent.goToPage($index() + 1); }"></a></li>
+                                        <!-- /ko -->
+                                        <li><a class="pager-next" href="#"></a></li>                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</main>
+
+@section Scripts{
+    <script src="/assets/js/candidates/candidates.js"></script>
+}
