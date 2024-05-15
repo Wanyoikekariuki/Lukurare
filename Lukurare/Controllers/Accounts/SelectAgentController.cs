@@ -1,7 +1,7 @@
 ﻿using EFDatabaseModel.Contexts;
 using EFDatabaseModel.DbModel;
-using EmigrationBackend.Models;
-using EmigrationBackend.Repositories;
+using LukurareBackend.Models;
+using LukurareBackend.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using ProjectBase.KendoUiSupport;
@@ -9,7 +9,7 @@ using ProjectBaseWeb.Controllers.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EmigrationWeb.Controllers.Accounts
+namespace Lukurare.Controllers.Accounts
 {
 
     [Route("Accounts/SelectAgent")]

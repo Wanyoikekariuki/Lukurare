@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SeekersHub": {
+    "Lukurare": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

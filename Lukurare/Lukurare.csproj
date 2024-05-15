@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -24,7 +20,7 @@
     <ProjectReference Include="..\CommunicationLibrary\CommunicationLibrary.csproj" />
     <ProjectReference Include="..\ProjectBaseWeb\ProjectBaseWeb.csproj" />
     <ProjectReference Include="..\ProjectBase\ProjectBase.csproj" />
-    <ProjectReference Include="..\SeekersHubBackend\SeekersHubBackend.csproj" />
+    <ProjectReference Include="..\LukurareBackend\LukurareBackend.csproj" />
   </ItemGroup>
 
   <ItemGroup>

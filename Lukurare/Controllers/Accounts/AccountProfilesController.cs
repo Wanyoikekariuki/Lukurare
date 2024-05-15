@@ -4,12 +4,12 @@ using ProjectBaseWeb.Controllers.Repository;
 using EFDatabaseModel.DbModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
-using EmigrationBackend.Repositories.Accounts;
+using LukurareBackend.Repositories.Accounts;
 using ProjectBase.KendoUiSupport;
-using EmigrationBackend.Models.DashBoard;
+using LukurareBackend.Models.DashBoard;
 using ProjectBase.Repository.Transaction;
 
-namespace EmigrationWeb.Controllers.Accounts
+namespace Lukurare.Controllers.Accounts
 {
     [Route("Accounts/AccountProfiles")]
     public class AccountProfilesController

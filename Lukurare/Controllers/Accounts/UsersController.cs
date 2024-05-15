@@ -4,10 +4,10 @@ using ProjectBaseWeb.Controllers.Repository;
 using EFDatabaseModel.DbModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
-using EmigrationBackend.Repositories.Accounts;
+using LukurareBackend.Repositories.Accounts;
 using Microsoft.AspNetCore.Authorization;
 
-namespace EmigrationWeb.Controllers.Accounts
+namespace Lukurare.Controllers.Accounts
 {
     [Route("Accounts/Users")]
     [Authorize(Roles = "Admin")]

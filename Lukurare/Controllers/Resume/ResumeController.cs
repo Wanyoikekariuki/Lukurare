@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectBaseWeb.Controllers.Repository;
-using SeekersHubBackend.Models.Resume;
-using SeekersHubBackend.Repositories.Accounts;
+using LukurareBackend.Models.Resume;
+using LukurareBackend.Repositories.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SeekersHub.Controllers.Resume
+namespace Lukurare.Controllers.Resume
 {
     
     [Route("Resume/Resume")]

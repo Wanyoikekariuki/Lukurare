@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectBaseWeb.Controllers.Repository;
-using SeekersHubBackend.Models;
-using SeekersHubBackend.Repositories.Accounts;
+using LukurareBackend.Models;
+using LukurareBackend.Repositories.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SeekersHub.Controllers.Candidates
+namespace Lukurare.Controllers.Candidates
 {
     [Route("Candidates/Candidates")]
     

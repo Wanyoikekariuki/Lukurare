@@ -2,14 +2,14 @@ using System.Threading.Tasks;
 using ProjectBaseWeb.Controllers.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
-using EmigrationBackend.Models.DashBoard;
-using EmigrationBackend.Repositories.DashBoard;
+using LukurareBackend.Models.DashBoard;
+using LukurareBackend.Repositories.DashBoard;
 using System.Collections.Generic;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using System;
 
-namespace EmigrationWeb.Controllers.DashBoard
+namespace Lukurare.Controllers.DashBoard
 {
     [Route("DashBoard/Dashboard")]
     public class DashboardController : BulkSMSGatewayBaseGridController<DashBoardModel, DashBoardModelRepository>

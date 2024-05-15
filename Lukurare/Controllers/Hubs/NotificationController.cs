@@ -1,14 +1,14 @@
 ﻿using EFDatabaseModel.DbModel;
-using EmigrationBackend.Models;
-using EmigrationBackend.Models.Hubs;
-using EmigrationBackend.Repositories.Accounts;
-using EmigrationBackend.Repositories.Hub;
+using LukurareBackend.Models;
+using LukurareBackend.Models.Hubs;
+using LukurareBackend.Repositories.Accounts;
+using LukurareBackend.Repositories.Hub;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using ProjectBaseWeb.Controllers.Repository;
 using System.Threading.Tasks;
 
-namespace EmigrationWeb.Controllers.Accounts
+namespace Lukurare.Controllers.Accounts
 {
 
     [Route("Hubs/Notification")]

@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectBaseWeb.Controllers.Repository;
-using SeekersHubBackend.Models.Companies;
-using SeekersHubBackend.Repositories.Accounts;
+using LukurareBackend.Models.Companies;
+using LukurareBackend.Repositories.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SeekersHub.Controllers.Companies
+namespace Lukurare.Controllers.Companies
 {
     [Route("Companies/Companies")]   
     public class CompaniesController : BulkSMSGatewayBaseGridController<AccountEntity, CompaniesRepository>
