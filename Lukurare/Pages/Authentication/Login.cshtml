@@ -1,5 +1,5 @@
 ﻿@page
-@model SeekersHub.Pages.Authentication.LoginModel
+@model Lukurare.Pages.Authentication.LoginModel
 @{
     //Layout = "/Pages/Shared/_Layout.cshtml";
     ViewData["Title"] = "Login";
@@ -11,9 +11,9 @@
             <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
                 <div class="text-center">
                     <p class="font-sm text-brand-2">Welcome back! </p>
-                    <h2 class="mt-10 mb-5 text-brand-1">Student Login</h2>
+                    <h2 class="mt-10 mb-5 text-brand-1">Admin Login</h2>
                 </div>
-                <form class="login-register text-start mt-20" action="#">
+                <div class="login-register text-start mt-20">
                     <div class="form-group">
                         <label class="form-label" for="input-1">Username</label>
                         <input class="form-control" id="input-1" type="text" required="" name="fullname" placeholder="Username" data-bind="value:Username">
@@ -37,7 +37,7 @@
                     </div>
                     <div id="alertArea" class="alert" role="alert" style="display: none;"></div>
                     <div class="text-muted text-center">Don't have an Account? <a href='/Authentication/Register'>Sign up</a></div>
-                </form>
+                </div>
             </div>
             <div class="img-1 d-none d-lg-block"><img class="shape-1" src="/assets/imgs/page/login-register/img-4.svg" alt="JobBox"></div>
             <div class="img-2"><img src="/assets/imgs/page/login-register/img-3.svg" alt="InternJob-Match"></div>
@@ -57,7 +57,7 @@
                             Your new password must be different from previously used passwords
                         </p>
                     </div>
-                    <form class="login-register text-start mt-20" action="#">
+                    <div class="login-register text-start mt-20" >
                         <div class="form-group">
                             <label class="form-label" for="input-1">OTP code Sent to your email *</label>
                             <input class="form-control" id="input-1" type="text" required="" name="emaill" placeholder="OTP Code" data-bind="value:OtpCode">
@@ -75,9 +75,9 @@
                         </div>
                         <div id="alertArea" class="alert" role="alert" style="display: none;"></div>
                         <div class="text-muted text-center"> <a href='/Companies/CompanyLogin'>Back to Login</a></div>
-                    </form>
+                    </div>
                 </div>
-                <div class="img-1 d-none d-lg-block"><img class="shape-1" src="/assets/imgs/page/login-register/img-5.svg" alt="SeekersHub"></div>
+                <div class="img-1 d-none d-lg-block"><img class="shape-1" src="/assets/imgs/page/login-register/img-5.svg" alt="Lukurare"></div>
                 <div class="img-2"><img src="/assets/imgs/page/login-register/img-3.svg" alt="InternJob-Match"></div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                             Enter your username and we'll send you a code to your registered email
                         </p>
                     </div>
-                    <form class="login-register text-start mt-20" action="#">
+                    <div class="login-register text-start mt-20" >
                         <div class="form-group">
                             <label class="form-label" for="input-1">Username *</label>
                             <input class="form-control" id="input-1" type="text" required="" name="email" placeholder="Username" data-bind="value:Username">
@@ -106,7 +106,7 @@
                         </div>
                         <div id="alertArea" class="alert" role="alert" style="display: none;"></div>
                         <div class="text-muted text-center"> <a href='/Companies/CompanyLogin'>Back to Login</a></div>
-                    </form>
+                    </div>
                 </div>
                 <div class="img-1 d-none d-lg-block"><img class="shape-1" src="/assets/imgs/page/login-register/img-5.svg" alt="InternJob-Match"></div>
                 <div class="img-2"><img src="/assets/imgs/page/login-register/img-3.svg" alt="InternJob-Match"></div>
@@ -116,7 +116,17 @@
 </main>
 
 @section Scripts{
-    <script src="/assets/js/authentication/login.js"></script>
+
+    <script type="text/javascript" src="/Admin/js/knockout-3.5.1.js"></script>
+    <script src="/vendors/leizam/js/jqueryAjaxGenerics.js"></script>
+    <script src="/vendors/leizam/js/jqueryConfirmGenerics.js"></script>
     <script src="/vendors/leizam/js/kendoHelpers.js"></script>
     <script src="/vendors/leizam/js/authenticationHelper.js"></script>
+
+    <!-- JQUERY CONFIRM js-->
+    <script src="/vendors/jqueryconfirm/jquery-confirm.min.js"></script>
+    <!-- END JQUERY CONFIRM js-->
+    <!-- BEGIN KENDO UI SPECIFIC SCRIPTS-->
+    <script type="text/javascript" src="/Admin/js/blockUI.js"></script>
+    <script src="/Admin/js/authentication/login.js"></script>
 }

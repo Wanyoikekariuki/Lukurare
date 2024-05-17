@@ -5,13 +5,11 @@ using CommunicationLibrary.Gateways.Telephony.SMS;
 using CommunicationLibrary.Telephony.Messaging.SMS;
 using EFDatabaseModel.Contexts;
 using EFDatabaseModel.DbModel;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using ProjectBase.Database.Connection;
 using ProjectBase.Repository;
-using ProjectBase.Repository.Configuration;
 using ProjectBase.Repository.Transaction;
 using ProjectBase.Security;
 using RestSharp;
@@ -100,44 +98,6 @@ namespace Authentication.Repository
                 #endregion
 
                 var passwordHashed = EncryptionHelper.SHA256HexHash(model.Password);
-
-                var checkUserType = await context.Users
-                     .Join(context.AccountEntities, a => a.AccountEntityId, b => b.Id, (a, b) => new { a, b })
-                     .Join(context.AccountEntityTypes, c => c.b.AccountEntityTypeId, d => d.Id, (c, d) => new { c, d })
-                     .Where(ab => ab.c.a.Username == model.Username)
-                     .FirstOrDefaultAsync();
-
-                string currentPage = model.CurrentPage;
-
-                if (currentPage == "/Admin/Authentication/AdminLogin")
-                {
-                    if (checkUserType == null || checkUserType.d.TypeName != DefaultConfiguration.AccountEntityType.adminTypeName)
-                    {
-                        executionResult.IsOkay = false;
-                        executionResult.Message = checkUserType == null ? "Invalid username or password" : "Unauthorized access. You are not registered as an Admin";
-                        return executionResult;
-                    }
-                }
-
-                if (currentPage == "/Companies/CompanyLogin")
-                {
-                    if (checkUserType == null || checkUserType.d.TypeName != DefaultConfiguration.AccountEntityType.companyTypeName)
-                    {
-                        executionResult.IsOkay = false;
-                        executionResult.Message = checkUserType == null ? "Invalid username or password" : "Unauthorized access. You are not registered as an Company";
-                        return executionResult;
-                    }
-                }
-
-                if (currentPage == "/Authentication/Login")
-                {
-                    if (checkUserType == null || checkUserType.d.TypeName != DefaultConfiguration.AccountEntityType.InternTypeName)
-                    {
-                        executionResult.IsOkay = false;
-                        executionResult.Message = checkUserType == null ? "Invalid username or password" : "Unauthorized access. You are not registered as an Intern";
-                        return executionResult;
-                    }
-                }
 
                 //var connn = context.Database.GetDbConnection();
                 //simple login logic for now

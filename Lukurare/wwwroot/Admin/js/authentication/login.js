@@ -84,6 +84,11 @@ var login = {
                 this.Password2 = ko.observable();
                 this.Password12 = ko.observable();
                 this.OtpCode = ko.observable();
+                this.PasswordVisible = ko.observable(false);
+                this.togglePasswordVisibility = function () {
+                    this.PasswordVisible(!this.PasswordVisible());
+                };
+
                 this.sendOtpRenewText = ko.observable("Send Code to Email");
                 
 

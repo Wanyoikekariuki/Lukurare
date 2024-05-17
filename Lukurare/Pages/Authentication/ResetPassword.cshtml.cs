@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SeekersHub.Pages.Authentication
+namespace Lukurare.Pages.Authentication
 {
     public class ResetPasswordModel : PageModel
     {

@@ -1,4 +1,5 @@
 ﻿var authenticationHelper = {
+
     navigateToPath: function (url) {
         if (navigator.userAgent.match(/MSIE\s(?!9.0)/)) {
             var referLink = document.createElement("a");
@@ -10,8 +11,10 @@
             window.location.replace(url);
         }
     },
+
     //equivalent of log out function
-    endSessionCurrent: function () {        
+    endSessionCurrent: function () {
+        
         //end the session and wether is completes or not display navigate to login page
         jqueryAjaxGenerics.createAjaxRequest("GET", "/Authentication/EndSession", "json",
             "application/json", null, function (hasError, message, data) {
@@ -23,7 +26,9 @@
                 authenticationHelper.displayLoginPage();
             });
     },
-    checkLoggedIn: function () {        
+
+    checkLoggedIn: function () {
+        
         $.ajax({
             type: "GET",
             url: '/Authentication/SessionLoggedIn',
@@ -37,11 +42,13 @@
 
                     $("#userNameLayout").html(data.Result);
                     $("#userNameDashBoard").html(data.Result);
+
                 }
                 catch (err) {
                     //dont do any thing
                 }
             }
+
         }).fail(function (jqxhr) {
             if (jqxhr.status === 401) {
                 authenticationHelper.displayLoginPage();
@@ -49,14 +56,15 @@
             }
         });
     },
- 
+
     displayLoginPage: function () {
         authenticationHelper.navigateToPath("/Authentication/Login")
     },
     displayIndexPage: function () {
-
-        authenticationHelper.navigateToPath("/User/UserProfile")
+        authenticationHelper.navigateToPath("/AdminView/Dashboard/Index")
     },
+
+
     cookieManager: {
         createCookie: function (name, value, days) {
             var expires = "";

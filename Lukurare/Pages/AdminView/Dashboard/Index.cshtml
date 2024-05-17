@@ -1,0 +1,1070 @@
+﻿@page
+@model Lukurare.Pages.AdminView.Dashboard.IndexModel
+@{
+    Layout = "/Pages/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Dashboard";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+}
+<section id="basic-datatable">
+    <!-- Section 0: Questionnaire -->
+    <!-- Questionnaire Modal -->
+    <div id="myModal" class="modalQuestionnaire fade" data-bind="visibility: questionnaireVisibility" style="display: none">
+        <!-- Modal content -->
+        <div class="modalQuestionnaire-content">
+            <div class="container">
+                <h2 data-bind="visible: questionnaireTitle"><b>Before you continue, we want to know more about you</b></h2>
+                <h6 data-bind="visible: questionnaireSubtitle">Please be as accurate as possible</h6>
+
+                <!-- Step 1: Birthdate -->
+                <div id="stepOneQuestionnaire" data-bind="visible: stepOneQuestionnaireVisibility" class="question">
+                    <p>STEP 1 OF 3</p>
+                    <div class="h5"><b>When were you born?</b></div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:33%">
+                        </div>
+                    </div>
+
+                    <div class="mt-1 ml-1">
+                        <p>Date: <input class="ml-2" type="date" id="birthday" name="birthday" data-bind="value: birthDate" min="1923-01-01" max="2021-12-31"> </p>
+                    </div>
+
+                    <div class="mt-1">
+                        <p>Your Age: <span data-bind="text: customerAge"></span><span data-bind="visible: yearsOldVisibility"> years old</span> </p>
+                    </div>
+
+                    <div class="mt-1">
+                        <div id="warningMessage" class="alert alert-warning" data-bind="visible: warningMessageVisibility">Please fill out this field</div>
+                    </div>
+
+                    <div class="d-flex align-items-center pt-3">
+                        <button id="btnQuizNext1" class="btn btn-success" data-bind="click: btnQuestionnaireNext1Action, visible: btnQuestionnaireNext1Visibility">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Education Level -->
+                <div id="stepTwoQuestionnaire" data-bind="visible: stepTwoQuestionnaireVisibility" class="question">
+                    <p>STEP 2 OF 3</p>
+                    <div class="h5"><b>What is your highest level of education?</b></div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:66%">
+                        </div>
+                    </div>
+                    <div class="ml-md-3 ml-sm-3 pt-2" id="options">
+
+                        <label class="options">
+                            No schooling completed
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'No schooling completed'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Nursery school to 8th grade (Primary School)
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'Nursery school to 8th grade (Primary School)'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Some high school, no diploma
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'Some high school, no diploma'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            High school graduate, diploma or the equivalent (Example: GED)
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'High school graduate, diploma or the equivalent (Example: GED)'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Some college credit, no degree
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'Some college credit, no degree'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Trade/technical/vocational training
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'Trade/technical/vocational training'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Associate degree
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'Associate degree'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Bachelor’s degree
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'Bachelor’s degree'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Master’s degree
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'Master’s degree'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Professional degree
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'Professional degree'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Doctorate degree
+                            <input type="radio" name="radio" data-bind="checked: highestLevelOfEducation, value: 'Doctorate degree'">
+                            <span class="checkmark"></span>
+                        </label>
+
+
+                    </div>
+
+                    <div class="mt-1">
+                        <div id="warningMessage" class="alert alert-warning" data-bind="visible: warningMessageVisibility">Please fill out this field</div>
+                    </div>
+
+                    <div class="d-flex align-items-center pt-3">
+                        <button id="btnQuizPrevious2" class="btn btn-primary" data-bind="click: btnQuestionnairePrevious2Action, visible: btnQuestionnairePrevious2Visibility">Previous</button>
+                        <button id="btnQuizNext2" class="btn btn-success ml-auto mr-sm-5" data-bind="click: btnQuestionnaireNext2Action, visible: btnQuestionnaireNext2Visibility">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: How Did You Know About Us? -->
+                <div id="stepThreeQuestionnaire" data-bind="visible: stepThreeQuestionnaireVisibility" class="question">
+                    <p>STEP 3 OF 3</p>
+                    <div class="h5"><b>How did you come to know of us?</b></div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                        </div>
+                    </div>
+                    <div class="ml-md-3 ml-sm-3 pt-2" id="options">
+                        <label class="options">
+                            Visited our physical office
+                            <input type="radio" name="radio" data-bind="checked: howDidYouKnowOfUs, value: 'Visited our physical office'">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="options">
+                            Agent
+                            <input type="radio" name="radio" data-bind="checked: howDidYouKnowOfUs, value: 'Agent'">
+                            <span class="checkmark"></span>
+                        </label>
+                        @*                                 <label class="options">
+                        Saw an advertisement
+                        <input type="radio" name="radio" data-bind="checked: howDidYouKnowOfUs, value: 'Saw an advertisement'">
+                        <span class="checkmark"></span>
+                        </label> *@
+                        <label class="options">
+                            Online
+                            <input type="radio" name="radio" data-bind="checked: howDidYouKnowOfUs, value: 'Online'">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div class="mt-1">
+                        <div id="warningMessage" class="alert alert-warning" data-bind="visible: warningMessageVisibility">Please fill out this field</div>
+                    </div>
+
+                    <div class="d-flex align-items-center pt-3">
+                        <button id="btnQuizPrevious3" class="btn btn-primary" data-bind="click: btnQuestionnairePrevious3Action, visible: btnQuestionnairePrevious3Visibility">Previous</button>
+                        <button id="btnQuizSubmit" class="btn btn-success ml-auto" data-bind="click: btnQuestionnaireNext3Action, visible: btnQuestionnaireNext3Visibility">Finish</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Thank you!-->
+                <div id="endQuestionnaire" data-bind="visible: endQuestionnaireVisibility" class="question">
+
+                    <div class="jumbotron text-center">
+                        <h5 class="display-4">Thank You for your response!</h5>
+                        <p>
+                            You will be redirected to the home page in a few seconds.
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End questionnaire -->
+
+    <div class="col-12" data-bind="visible: SelectAgentVisible">
+        <div class="row">
+            <!-- Section 1: Select Preferred Agent -->
+            <div class="col-md-6" @*id="firstCard"*@>
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="card-title mb-0 text-white">Step 1: Choose Your Preferred Agent</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <form class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <br />
+                                <label class="form-label card-subtitle mb-2" for="default-select">Select your Preferred Agent</label>
+                                <select class="form-select select2" data-bind="options: Agents,
+                                        optionsCaption: 'Select Agent',
+                                        optionsText: function(item) {
+                                            return item.EntityName + ' - ' + item.Email;
+                                        },
+                                        value: selectedAgent">
+                                </select>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button data-bind="click: submitAgentDetails" class="btn btn-primary" type="button">Next</button>
+                            </div>
+                        </form>
+                        <div class="mt-3 text-muted">
+                            <p><em>Note: This is the first step to selecting your preferred agent.</em></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Agent Details Confirmation -->
+            <div class="col-md-6 agent-details-card d-none">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h4 class="card-title mb-0 text-white">Step 2: Confirm Agent Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <br />
+                        <h5 class="card-subtitle mb-2 text-muted">Agent Details</h5>
+                        <p class="mb-2">
+                            <strong class="me-2">Name:</strong>
+                            <span class="agent-name"></span>
+                        </p>
+                        <p><strong>Email:</strong><span class="ms-2 agent-email"></span></p>
+
+                        <div class="d-grid gap-2">
+                            <button data-bind="click:confirmDetails" class="btn btn-success" type="button">Confirm Agent</button>
+                        </div>
+                        <br />
+                        <div class="text-muted">
+                            <p>
+                                <em>
+                                    Note: This is the second step to confirm the details of the selected agent. You can also find this
+                                    information under the 'More Info' section, specifically in the 'Agent Info' subsection.
+                                </em>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: country information -->
+    <div class="col-md-12" data-bind="visible:SelectCountryVisible">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="card-title mb-0 text-white">Step 3: Enter Your Country Information</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-6 col-md-12 col-12">
+                        <div class="mb-1">
+                            <label class="form-label" for="basicInput">Enter Your Citizenship</label>
+                            <input type="text" class="form-control" id="Citizenship" placeholder="Enter your Citizenship" data-bind="value:countryCitizenship" />
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-12 col-12">
+                        <div class="mb-1">
+                            <label class="form-label" for="helpInputTop">Select Your Current Country</label>
+                            <select class="select2 form-select" data-bind="options: Countries,
+
+                                            optionsCaption:'Select Current Country',
+                                        optionsText:function(item) {
+                                               return item.CountryName
+                                           },
+                                        value:selectedCurrentCountry">
+                                >
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-12 col-12">
+                        <div class="mb-1">
+                            <label class="form-label" for="disabledInput">Select Your Origin Country</label>
+                            <select class="select2 form-select" data-bind="options: Countries,
+
+                                            optionsCaption:'Select Country of Origin',
+                                        optionsText:function(item) {
+                                           return item.CountryName
+                                       },
+                                        value:selectedCountryOrigin">
+                                >
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-12 col-12">
+                        <div class="mb-1">
+                            <label class="form-label" for="helperText">Select Country You are travelling To</label>
+                            <select class="select2 form-select" data-bind="options: Countries,
+
+                                            optionsCaption:'Select Country you are Travelling to ',
+                                        optionsText:function(item) {
+                                           return item.CountryName
+                                       },
+                                        value:selectedCountryTravelling">
+                                >
+
+                            </select>
+                        </div>
+                    </div>
+                    <button style="left: 30%;" class="btn btn-primary col-xl-4 col-md-6 col-12" data-bind="click:AddCountries">Submit</button>
+                </div>
+                <br />
+                <div class="text-muted">
+                    <p>
+                        <em>
+                            Note: This is the third step for entering your country information details. "Citizenship" refers to the country of which you are a citizen.
+                            "Current country" pertains to your present location. "Country of origin" is the nation you originate from.
+                            Lastly, the "country you are traveling to" is the destination you are heading to.
+                        </em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: required documents -->
+    <div class="col-md-12" data-bind="visible:FilesTobeUploaded">
+        <div class="card shadow">
+            <div class="card-header bg-danger text-white" data-bind="visible:AgentMenueVisible">
+                <h2 class="card-title text-white">Reqiured Documents.</h2>
+            </div>
+            <div class="card-header bg-danger text-white" data-bind="visible:CustomerMenueVisible">
+                <h2 class="card-title text-white">Step 4:  Reqiured Documents.</h2>
+            </div>
+            <div class="card-body" data-bind="visible:AgentMenueVisible, CustomerMenueVisible">
+                <p class="card-text">
+                    <br />
+                    <strong style="font-size: 18px;">Please upload all the required documents in PDF format.</strong>
+                </p>
+                <div class="text-muted ml-5" data-bind="visible:CustomerMenueVisible">
+                    <p>
+                        <em>
+                            Note :
+                            These documents are mandatory. It's advisable you upload all of them.If you're unsure on what to do,don't worry. You can find more information in the 'More Info' section. Check the details of the agent you've selected,
+                            and if needed, you can send them a message by clicking on the notification icon. In the message composition window,
+                            you'll find a button for sending a new message. To reach your agent, you can use the email address provided: [YourAgentEmail@example.com].
+                        </em>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" data-bind="visible:NationalIDVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Enter your National ID Number and Upload a copy of National ID<b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b>Enter the National ID Number</b></p>
+                            <p class="card-text"><b><h6><code>First Submit the Number Required</code></h6></b></p>
+                            <div class="col-md-12 col-12 mb-1">
+                                <input type="text" class="form-control" id="ID No" placeholder="National ID Number" data-bind="value:NationalIDNumber" />
+                                <br />
+                                <p class="card-text"><b>Upload both front and back of the National ID in <code>ONE</code> pdf</b></p>
+                                <div class="input-group" id="upload_Section">
+                                    <input type="file" accept=".pdf" class="form-control" id="National ID" data-bind="event:{change:setSelectedDocument}" />
+                                </div>
+                            </div>
+                            <button class="btn btn-success col-xl-4 col-md-6 col-12" style="left: 30%;" type="button" data-bind="click: validateNationalID" id="btnUploadFile">Submit </button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-md-12" data-bind="visible:ParentIDVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Enter your Parent's National ID Number and Upload a copy of your Parent's National ID document<b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b>Enter your Parent's ID Number</b></p>
+                            <p class="card-text"><b><h6><code>First Submit the Number Required</code></h6></b></p>
+                            <div class="col-md-12 col-12 mb-1">
+                                <input type="text" class="form-control" id="ParentID" placeholder="Enter parent ID Number" data-bind="value:ParentIDNumber" />
+                                <br />
+                                <p class="card-text"><b>Upload both front and back of the your Parent's National ID in<code>ONE</code> pdf</b></p>
+                                <div class="input-group" id="upload_Section">
+                                    <input type="file" accept=".pdf" class="form-control" id="Parents ID" data-bind="event:{change:setSelectedDocument}" />
+                                </div>
+                            </div>
+                            <button class="btn btn-success col-xl-4 col-md-6 col-12" style="left: 30%;" type="button" data-bind="click: validateParentsID" id="btnUploadFile">Submit </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12" data-bind="visible:BirthCertificateVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Enter your Birth Certificate Number and Upload a copy of your Birth Certificate  <b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b><h6><code>First Submit the Number Required</code></h6></b></p>
+                            <div class="col-md-12 col-12 mb-1">
+                                <input type="text" class="form-control" id="" placeholder="Enter Birth Certificate Number" data-bind="value:BirthCertificateNumber" />
+                                <br />
+                                <h4 class="card-title">Upload a copy of your Birth Certificate document<b><code>*</code></b></h4>
+                                <div class="input-group" id="upload_Section">
+                                    <input type="file" accept=".pdf" class="form-control" id="Birth Certificate" data-bind="event:{change:setSelectedDocument}" />
+                                </div>
+                            </div>
+                            <button class="btn btn-success col-xl-4 col-md-6 col-12" style="left: 30%;" type="button" data-bind="click: validateBirthCertID" id="btnUploadFile">Submit </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:PassportPhotoVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload 2 Passport Photos<b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b>Upload the two Passport Photos in one pdf.</b><p>
+                                <div class="row">
+                                    <div class="col-md-12 col-12 mb-1">
+                                        <div class="input-group" id="upload_Section">
+                                            <input type="file" accept=".pdf" class="form-control" id="Passport Photo" data-bind="event:{change:setSelectedDocument}" />
+                                            <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:AcademicDocumentsVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload your Academic Documents<b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <b>
+                                    <h6>
+                                        Upload All your Academic Documents in one File
+                                    </h6>
+                                </b>
+                            </p>
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Academic Documents" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:GoodConductCertificateVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload a copy of your Good Conduct Certificate <b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Good Conduct Certificate" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:KRAPinVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload your KRA Pin and a copy of your KRA Pin document<b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b><h6><code>First Submit the Number Required</code></h6></b></p>
+                            <div class="col-md-12 col-12 mb-1">
+                                <input type="text" class="form-control" id="KraPin" placeholder="Enter Kra Pin" data-bind="value:KraPinNumber" />
+                                <br />
+                                <h4 class="card-title">Upload a copy of KRA Pin document<b><code>*</code></b></h4>
+                                <div class="input-group" id="upload_Section">
+                                    <input type="file" accept=".pdf" class="form-control" id="KRA Pin" data-bind="event:{change:setSelectedDocument}" />
+                                </div>
+                            </div>
+
+                            <button class="btn btn-success col-xl-4 col-md-6 col-12" style="left: 30%;" type="button" data-bind="click: validateKRAPinNumber" id="btnUploadFile">Submit </button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:MedicalExaminationCertificateVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload a copy of Medical Examination Certificate<b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Medical Examination Certificate" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:CurriculumVitaeVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload a copy of  Curriculum Vitae document<b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Curriculum Vitae" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:CovidVaccineCertificateVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload a copy of Covid -19 Vaccine Certificate<b><code>*</code></b></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Covid -19 Vaccine Certificate" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:LabourExportPermitVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload your Labour Export Permit</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Labour Export Permit" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:BusinessPermitVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload your Business Permit Certificate</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Business Permit Certificate" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:AreaChiefLetter">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload your Letter from your home Area chief</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Letter from Area Chief" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- Section 5: optional documents -->
+    <div class="col-md-12" data-bind="visible:FilesTobeUploaded">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h2 class="card-title text-white">Step 5: Optional Documents. </h2>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <br />
+                    <strong style="font-size: 18px;">Please upload all the required documents in PDF format.</strong>
+                </p>
+                <div class="text-muted ml-5">
+                    <p>
+                        <em>
+                            Note: These documents are optional. If you don't have any of the documents, you don't need to upload them.  This is the final step of uploading your documents.
+                        </em>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" data-bind="visible:PassportVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Enter your Passport Number and Upload a copy of your Passport document</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b><h6><code>First Submit the Number Required</code></h6></b></p>
+                            <p class="card-text"><b>If it's Available</b></p>
+                            <div class="col-md-12 col-12 mb-1">
+                                <input type="text" class="form-control" id="PassPort No" placeholder="Enter PassPort Number" data-bind="value:PassPortNumber" />
+                                <br />
+                                <p class="card-text"><b>Upload a copy of your Passport document </b></p>
+                                <div class="input-group" id="upload_Section">
+                                    <input type="file" accept=".pdf" class="form-control" id="Passport" data-bind="event:{change:setSelectedDocument}" />
+                                </div>
+                            </div>
+                            <button class="btn btn-success col-xl-4 col-md-6 col-12" style="left: 30%;" type="button" data-bind="click: validatePassportNumber" id="btnUploadFile">Submit </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:ChildBirthCertificateVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Enter your Child's Birth Certificate Number and Upload a copy of your Child's Birth Certificate Document</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b><h6><code>First Submit the Number Required</code></h6></b></p>
+                            <p class="card-text"><b>If it's available </b><p>
+                                <div class="col-md-12 col-12 mb-1">
+                                    <input type="text" class="form-control" id="Childs Birth Certificate No" placeholder="Child Birth Certificate Number" data-bind="value:ChildsBirthCertificateNumber" />
+                                    <br />
+                                    <h4 class="card-title">Upload your Child's' Birth Certificate document</h4> <div class="col-md-12 col-12 mb-1">
+                                        <div class="input-group" id="upload_Section">
+                                            <input type="file" accept=".pdf" class="form-control" id="Child Birth Certificate" data-bind="event:{change:setSelectedDocument}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success col-xl-4 col-md-6 col-12" style="left: 30%;" type="button" data-bind="click: validateChildBirthCertNumber" id="btnUploadFile">Submit </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:SpouseIDVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Enter your Spouse National ID Number and a copy of their National ID document</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b><h6><code>First Submit the Number Required</code></h6></b></p>
+                            <p class="card-text"><b>if married</b><p>
+                                <div class="col-md-12 col-12 mb-1">
+                                    <input type="text" class="form-control" id="Spouse ID No" placeholder="Enter Spouse ID Number" data-bind="value:SpouseIDNumber" />
+                                    <br />
+                                    <h4 class="card-title">Upload your Spouse National ID document</h4>
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Spouse ID" data-bind="event:{change:setSelectedDocument}" />
+                                    </div>
+                                </div>
+                                <button class="btn btn-success col-xl-4 col-md-6 col-12" style="left: 30%;" type="button" data-bind="click: validateSpouseID" id="btnUploadFile">Submit </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:BankStatementVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload a copy of your latest Bank Statement </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Bank Statement" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:LanguageTestCertificateVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload your Language Test Certificate</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Language Test Certificate" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:BiometricsVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload a copy of your Biometrics</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Biometrics" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:PaySlipVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload  your latest Pay Slip</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b><h6><code>Upload the last 6 months payslips</code></h6></b></p>
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Pay Slip" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:RecommendationLetterVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload  your Recommendation Letter</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Recommendation Letter" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:ProofofFundsVisible">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload Proof of Funds</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Proof of Funds" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:ProofofLandOwnership">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload Proof of Land Ownership</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Proof of Land Ownership" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:ProofofVehicleOwnership">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload Proof of Vehicle Ownership</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Proof of Vehicle Ownership" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" data-bind="visible:ProofofBusinessOwnership">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Upload Proof of Business Ownership</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-1">
+                                    <div class="input-group" id="upload_Section">
+                                        <input type="file" accept=".pdf" class="form-control" id="Proof of business Ownership" data-bind="event:{change:setSelectedDocument}" />
+                                        <button class="btn btn-success" type="button" data-bind="click:OnImport" id="btnUploadFile">Upload </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12" data-bind="visible:AllfilesUploadedVisible, AgentMenueVisible, CustomerMenueVisible">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white" data-bind="visible:CustomerMenueVisible, AgentMenueVisible">
+                <h2 class="card-title text-white">All documents have been uploaded.</h2>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bind="visible:CustomerMenueVisible, AgentMenueVisible">
+                    <h2 class="card-title">All files have been uploaded</h2>
+                </div>
+                <div class="card-body" data-bind="visible:CustomerMenueVisible">
+                    <p>
+                        Great job! You've successfully uploaded all the required files. The next step is to proceed to the Payments section and provide
+                        details for your payments. Remember, this step involves showing proof of payment rather than making an actual payment.
+                        Please ensure that the payment details are accurate.
+                    </p>
+                    <p>
+                        If you haven't made any payments yet or if you're unsure about what to do next after uploading your documents,
+                        don't worry. You can find more information in the 'More Info' section. Check the details of the agent you've selected,
+                        and if needed, you can send them a message by clicking on the notification icon. In the message composition window,
+                        you'll find a button for sending a new message. To reach your agent, you can use the email address provided: [YourAgentEmail@example.com].
+                    </p>
+                </div>
+                <div class="card-body" data-bind="visible:AgentMenueVisible">
+                    <p>
+                        For any communication with customers, you can also use the notification icon to access the messaging feature.
+                        To send a message to a customer, click the notification icon and then the 'Send Message' button. The email address of the customer
+                        will be listed under the Customers menu
+                    <p>
+                        Additionally, under the Customers menu, you can view the list of customers who have registered
+                        under you as an agent. You can also add a new customer from this menu. Once you create a new user, their
+                        login details will be sent to the customer automatically.
+                    </p>
+                    <p>
+                        Furthermore, you can check the payments made by all customers in the Transactions menu section. If necessary,
+                        you can approve the payments from there as well.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="dashboard-ecommerce" data-bind="visible:AdminMenueVisible">
+    <div class="row">
+        <!-- Card 1: Meter Accounts -->
+        <div class="col-xl-4 col-md-6 col-12">
+            <div class="card card-statistics">
+                <div class="card-header">
+                    <h4 class="card-title">Active Clients</h4>
+                </div>
+                <div class="card-body statistics-body">
+                    <div class="d-flex flex-row">
+                        <div class="avatar bg-light-primary me-2">
+                            <div class="avatar-content">
+                                <i data-feather="trending-up" class="avatar-icon"></i>
+                            </div>
+                        </div>
+                        <div class="my-auto">
+                            <h4 class="fw-bolder mb-0" data-bind="text:totalNumberofCustomers"></h4>
+                            <p class="card-text font-small-3 mb-0">Total Number of client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Active Meters  Accounts -->
+        <div class="col-xl-4 col-md-6 col-12">
+            <div class="card card-statistics">
+                <div class="card-header">
+                    <h4 class="card-title">Active Agents</h4>
+                </div>
+                <div class="card-body statistics-body">
+                    <div class="d-flex flex-row">
+                        <div class="avatar bg-light-info me-2">
+                            <div class="avatar-content">
+                                <i data-feather="user" class="avatar-icon"></i>
+                            </div>
+                        </div>
+                        <div class="my-auto">
+                            <h4 class="fw-bolder mb-0" data-bind="text:totalNumberofAgents"></h4>
+                            <p class="card-text font-small-3 mb-0">Total Agents</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Inactive Meters -->
+        <div class="col-xl-4 col-md-6 col-12">
+            <div class="card card-statistics">
+                <div class="card-header">
+                    <h4 class="card-title"> Application Fees Collection</h4>
+                </div>
+                <div class="card-body statistics-body">
+                    <div class="d-flex flex-row">
+                        <div class="avatar bg-light-danger me-2">
+                            <div class="avatar-content">
+                                <i data-feather="box" class="avatar-icon"></i>
+                            </div>
+                        </div>
+                        <div class="my-auto">
+                            <h4 class="fw-bolder mb-0" data-bind="text:totalApplicationFeeCollection"></h4>
+                            <p class="card-text font-small-3 mb-0">Total Application Fee Collection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4: Rent Accounts -->
+        <div class="col-xl-4 col-md-6 col-12">
+            <div class="card card-statistics">
+                <div class="card-header">
+                    <h4 class="card-title">Retainer Fee Collection</h4>
+                </div>
+                <div class="card-body statistics-body">
+                    <div class="d-flex flex-row">
+                        <div class="avatar bg-light-danger me-2">
+                            <div class="avatar-content">
+                                <i data-feather="box" class="avatar-icon"></i>
+                            </div>
+                        </div>
+                        <div class="my-auto">
+                            <h4 class="fw-bolder mb-0" data-bind="text:totalRetainerFeeCollection"></h4>
+                            <p class="card-text font-small-3 mb-0">Total Retainer Fee Collection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5: Active Rent Accounts -->
+        <div class="col-xl-4 col-md-6 col-12">
+            <div class="card card-statistics">
+                <div class="card-header">
+                    <h4 class="card-title"> Other Payment Collection</h4>
+                </div>
+                <div class="card-body statistics-body">
+                    <div class="d-flex flex-row">
+                        <div class="avatar bg-light-danger me-2">
+                            <div class="avatar-content">
+                                <i data-feather="box" class="avatar-icon"></i>
+                            </div>
+                        </div>
+                        <div class="my-auto">
+                            <h4 class="fw-bolder mb-0" data-bind="text:totalOtherPaymentCollection"></h4>
+                            <p class="card-text font-small-3 mb-0">Total other Payments Collection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @* <div class="row match-height">
+    <!-- Revenue and Budget Report Card -->
+    <div class="col-lg-12 col-md-12 col-12">
+    <div class="card card-revenue-budget">
+    <div class="row mx-0">
+    <div class="col-md-12 revenue-report-wrapper">
+    <!-- Update col-md-12 here -->
+    <div class="d-sm-flex justify-content-between align-items-center mb-3">
+    <h4 class="card-title mb-50 mb-sm-0">Total Collections Report</h4>
+    <div class="d-flex align-items-center">
+    </div>
+    </div>
+    <!-- Update the chart container with the id "totals-chart" -->
+    <div id="networks-chart" style="height: 400px;">
+    <!-- Bar and Line chart will be rendered here -->
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!--/ Revenue and Budget Report Card -->
+    </div> *@
+
+</section>
+<!-- Dashboard Ecommerce ends -->
+@section Scripts {
+    <script src="/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap5.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/jszip.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js"></script>
+    <script src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="/app-assets/vendors/js/forms/cleave/cleave.min.js"></script>
+    <script src="/app-assets/vendors/js/forms/cleave/addons/cleave-phone.us.js"></script>
+    <script src="/Admin/js/index.js"></script>
+}
