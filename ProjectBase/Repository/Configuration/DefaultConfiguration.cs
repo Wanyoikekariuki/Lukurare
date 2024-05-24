@@ -49,6 +49,8 @@ namespace ProjectBase.Repository.Configuration
             public static string Age = "Age";
             public static string HighestLevelOfEducation = "Highest level of education";
             public static string HowDidYouKnowOfUs = "How did you know of us";
+            public static string ImageDataDescName = "Image Description Name";
+            public static string ImageDataDescPrice = "Image Description Price";
         }
 
         public static class SystemModule

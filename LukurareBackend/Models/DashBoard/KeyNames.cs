@@ -22,5 +22,7 @@ namespace LukurareBackend.Models.DashBoard
         public string Age { get; set; }
         public string HighestLevelOfEducation{ get; set; }
         public string HowDidYouKnowOfUs { get; set; }
+        public string ImageDecName { get; set; }
+        public string ImageDecprice { get; set; }
     }
 }

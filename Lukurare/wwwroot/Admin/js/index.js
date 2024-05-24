@@ -278,58 +278,16 @@
             this.totalApplicationFeeCollection = ko.observable(0);
             this.totalOtherPaymentCollection = ko.observable(0);
 
-
-            //Start: Questionnaire observables
-            this.questionnaireVisibility = ko.observable(false);
-
-            this.stepOneQuestionnaireVisibility = ko.observable(true);
-            this.btnQuestionnaireNext1Visibility = ko.observable(true);
-
-            this.stepTwoQuestionnaireVisibility = ko.observable(false);
-            this.btnQuestionnaireNext2Visibility = ko.observable(false);
-            this.btnQuestionnairePrevious2Visibility = ko.observable(false);
-
-            this.stepThreeQuestionnaireVisibility = ko.observable(false);
-            this.btnQuestionnaireNext3Visibility = ko.observable(false);
-            this.btnQuestionnairePrevious3Visibility = ko.observable(false);
-
-            this.birthDate = ko.observable();
-            this.highestLevelOfEducation = ko.observable();
-            this.howDidYouKnowOfUs = ko.observable();
-
-            this.yearsOldVisibility = ko.observable(false);
-            this.warningMessageVisibility = ko.observable(false);
-            this.endQuestionnaireVisibility = ko.observable(false)
-
-            this.questionnaireTitle = ko.observable(true);
-            this.questionnaireSubtitle = ko.observable(true);
-
-            this.customerAge = ko.computed(() => {
-                debugger;
-                //If birthdate is selected get the year and compute the age
-                if (this.birthDate()) {
-                    // Create a new Date object using the birthDate string
-                    var dateObject = new Date(this.birthDate());
-                    var today = new Date();
-                    var age = today.getFullYear() - dateObject.getFullYear();
-
-                    this.yearsOldVisibility(true);
-
-                    return age;
-                }
-
-                this.yearsOldVisibility(false);
-                return "";
-            });
-
-            //End: Questionnaire observables
-
+            this.productNameInput = ko.observable();
+            this.productPriceInput = ko.observable();
 
             this.setSelectedDocument = function (data, event) {
                 debugger;
                 var self = this;
                 self.SelectedDocument(event.target.id);
             }
+
+
 
             this.showErrorMessage = function (title, message) {
                 var self = this;
@@ -532,185 +490,6 @@
 
             this.checkProfile();
 
-            this.chooseAgent = function () {
-                debugger;
-                var self = this;
-                self.hasError(false);
-                var functionDone = function (hasError, message, data) {
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    } else {
-                        self.Agents(data.Result);
-                    }
-                };
-                var functionFailed = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    }
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', data.Message, "red", null);
-                };
-                jqueryAjaxGenerics.createJSONAjaxGETRequest("/Accounts/SelectAgent/SelectAgent",
-                    functionDone, functionFailed);
-
-            }
-            this.chooseAgent();
-
-            this.agentDetails = function () {
-                debugger;
-                var self = this;
-                self.hasError(false);
-                var functionDone = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    } else {
-                        debugger;
-                        var agent = data.Result;
-
-                        if (!agent) { // Check for null or undefined agent
-                            self.AgentName(null); // Set to null or an empty string
-                            self.AgentEmail(null);
-                            self.AgentPhone(null);
-                            self.AgentLocation(null);
-                        } else {
-                            self.AgentName(agent.SubAccount.AccountName);
-                            self.AgentEmail(agent.SubAccount.Email);
-                            self.AgentPhone(agent.SubAccount.Phone);
-                            self.AgentLocation(agent.BuildingAddress);
-                        }
-                    }
-                };
-                var functionFailed = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    }
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', data.Message, "red", null);
-                };
-                jqueryAjaxGenerics.createJSONAjaxGETRequest("/Accounts/SelectAgent/AgentDetails",
-                    functionDone, functionFailed);
-
-            }
-            this.agentDetails();
-
-            this.validate = function () {
-                debugger;
-                var self = this;
-                if (!self.Agents()) {
-                    jqueryConfirmGenerics.showOkAlertBox('Validation Failed!', "Agent is required", "red", null);
-                    return false;
-                }
-
-
-                return true;
-            }
-
-            this.submitAgentDetails = function () {
-
-                debugger;
-                var self = this;
-
-                var result = self.validate();
-                if (result === false) {
-                    MVVM.unBlockUiPageElement($('body'));
-                    return;
-                }
-
-
-                var functionDone = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', Message, "red", null);
-                    } else if (data.IsOkay == false) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed', data.Message, "red", null);
-                        self.clearForm();
-                    }
-                    else {
-                        if (data.Message === 'Selected agent Successfully.') {
-                            jqueryConfirmGenerics.showOkAlertBox('You have Successfully choosen your Agent!', data.Message, "green", null);
-
-                            // Update agent details in the second card
-                            //$('.agent-name').text(selectedAgent.EntityName);
-                            //$('.agent-email').text(selectedAgent.Email);
-
-                            // Show the second card
-                            $('.agent-details-card').removeClass('d-none');
-                            // Update agent details observables
-                            //self.AgentName(data.SelectedAgent.AgentName);
-                            //self.AgentEmail(data.SelectedAgent.AgentEmail);
-
-                            //// Show the second card
-                            //self.AgentDetailsVisible(true);
-                            //window.location.reload();
-                        } else {
-                            jqueryConfirmGenerics.showOkAlertBox('You have already chosen an agent!', data.Message, "red", null);
-                            self.clearForm();
-                        }
-
-                        //jqueryConfirmGenerics.showOkAlertBox('You have Successfully choosen your Agent!', data.Message, "green", null);
-                        //self.clearForm();
-
-                    }
-
-                };
-                var functionFailed = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    }
-
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', data.Message, "red", null);
-                };
-                debugger;
-
-                debugger;
-                var data = self.selectedAgent();
-                $('.agent-name').text(data.EntityName);
-                $('.agent-email').text(data.Email);
-
-                debugger;
-
-                jqueryAjaxGenerics.createJSONAjaxNonGETRequest("POST", "/Accounts/SelectAgent/SubmitAgent", data,
-                    functionDone, functionFailed);
-
-            }
-
-            this.confirmDetails = function () {
-                window.location.reload();
-            };
-
-
-
-
-            this.chooseCountry = function () {
-                debugger;
-                var self = this;
-                self.hasError(false);
-                var functionDone = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    } else {
-                        var checkCountry = data.Result;
-                        self.Countries(data.Result);
-                    }
-                };
-                var functionFailed = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    }
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', data.Message, "red", null);
-                };
-                jqueryAjaxGenerics.createJSONAjaxGETRequest("/Accounts/SelectAgent/SelectCountry",
-                    functionDone, functionFailed);
-
-            }
-            this.chooseCountry();
-
-
-
             this.totalSummary = function () {
                 debugger;
                 var self = this;
@@ -752,258 +531,6 @@
             this.totalSummary();
 
 
-
-            this.CheckCountrySuplied = function () {
-                debugger;
-                var self = this;
-                if (!self.countryCitizenship() || self.countryCitizenship() === 0) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Enter Your Citizenship", "red", null);
-                    return false;
-                }
-                if (!self.selectedCountryOrigin() || self.selectedCountryOrigin() === 0) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Enter Your Country of Origin", "red", null);
-                    return false;
-                }
-                if (!self.selectedCurrentCountry() || self.selectedCurrentCountry() === 0) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Enter Your Current Country", "red", null);
-                    return false;
-                }
-                if (!self.selectedCountryTravelling() || self.selectedCountryTravelling() === 0) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Enter the Country You are Travelling To", "red", null);
-                    return false;
-                }
-                return true;
-            }
-
-            this.AddCountries = function () {
-                debugger;
-                var self = this;
-                var result = self.CheckCountrySuplied();
-
-                this.hasError(false);
-                var functionDone = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    } else {
-                        jqueryConfirmGenerics.showOkAlertBox('Success!', data.Message, "green", null);
-                        window.location.reload();
-
-                    }
-                };
-
-
-                var functionFailed = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    }
-
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', data.Message, "red", null);
-                };
-                debugger;
-                var data =
-                {
-                    CountryOrigin: self.selectedCountryOrigin().CountryName,
-                    CountryCitizenship: self.countryCitizenship(),
-                    CountryTravelling: self.selectedCountryTravelling().CountryName,
-                    CurrentCountry: self.selectedCurrentCountry().CountryName
-                };
-
-
-                debugger;
-                jqueryAjaxGenerics.createJSONAjaxNonGETRequest("POST", "/DashBoard/Dashboard/SubmitUserUploadDetails", data,
-                    functionDone, functionFailed);
-
-            }
-
-            //this.checkBalance();
-
-
-            this.validateNationalID = function () {
-                debugger;
-                var self = this;
-                MVVM.blockUiPageElementWithMessage($('body'), 'Uploading your File .... Please wait');
-
-                // Validate nationalID and uploadedDocument
-                var nationalID = self.NationalIDNumber();
-                var uploadedDocument = self.SelectedDocument();
-
-                if (!nationalID && !uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide both the National ID Number and the uploaded document.", "red", null);
-                } else if (!nationalID) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide the National ID Number.", "red", null);
-                } else if (!uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please upload the document.", "red", null);
-                } else {
-                    if (nationalID) {
-                        self.OnSubmit();
-                    }
-                    if (uploadedDocument) {
-                        self.OnImport();
-                        return;
-
-                    }
-                }
-
-            };
-            this.validateParentsID = function () {
-                debugger;
-                var self = this;
-                MVVM.blockUiPageElementWithMessage($('body'), 'Uploading your File .... Please wait');
-                // Validate parentID and uploadedDocument
-                var parentID = self.ParentIDNumber();
-                var uploadedDocument = self.SelectedDocument();
-
-                if (!parentID && !uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide both the Parent's ID Number and the uploaded document.", "red", null);
-                } else if (!parentID) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide the Parent's ID Number.", "red", null);
-                } else if (!uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please upload the document.", "red", null);
-                } else {
-                    if (parentID) {
-                        self.OnSubmit();
-                    }
-                    if (uploadedDocument) {
-                        self.OnImport();
-                        return;
-
-                    }
-                }
-            };
-
-            this.validateBirthCertID = function () {
-                debugger;
-                var self = this;
-                MVVM.blockUiPageElementWithMessage($('body'), 'Uploading your File .... Please wait');
-                // Validate birthCertNo and uploadedDocument
-                var birthCertNo = self.BirthCertificateNumber();
-                var uploadedDocument = self.SelectedDocument();
-
-                if (!birthCertNo && !uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide both the Birth Certificate Number and the uploaded document.", "red", null);
-                } else if (!birthCertNo) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide the Birth Certificate Number.", "red", null);
-                } else if (!uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please upload the document.", "red", null);
-                } else {
-                    if (birthCertNo) {
-                        self.OnSubmit();
-                    }
-                    if (uploadedDocument) {
-                        self.OnImport();
-                        return;
-
-                    }
-                }
-            };
-
-
-            this.validateKRAPinNumber = function () {
-                debugger;
-                var self = this;
-                MVVM.blockUiPageElementWithMessage($('body'), 'Uploading your File .... Please wait');
-                // Validate kraPinNo and uploadedDocument
-                var kraPinNo = self.KraPinNumber();
-                var uploadedDocument = self.SelectedDocument();
-
-                if (!kraPinNo && !uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide both the KraPin Number and the uploaded document.", "red", null);
-                } else if (!kraPinNo) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide the KraPin Number.", "red", null);
-                } else if (!uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please upload the document.", "red", null);
-                } else {
-                    if (kraPinNo) {
-                        self.OnSubmit();
-                    }
-                    if (uploadedDocument) {
-                        self.OnImport();
-                        return;
-
-                    }
-                }
-            };
-
-            this.validatePassportNumber = function () {
-                debugger;
-                var self = this;
-                MVVM.blockUiPageElementWithMessage($('body'), 'Uploading your File .... Please wait');
-                // Validate passPortNo and uploadedDocument
-                var passPortNo = self.PassPortNumber();
-                var uploadedDocument = self.SelectedDocument();
-
-                if (!passPortNo && !uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide both the PassPort Number and the uploaded document.", "red", null);
-                } else if (!passPortNo) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide the PassPort Number.", "red", null);
-                } else if (!uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please upload the document.", "red", null);
-                } else {
-                    if (passPortNo) {
-                        self.OnSubmit();
-                    }
-                    if (uploadedDocument) {
-                        self.OnImport();
-                        return;
-
-                    }
-                }
-            };
-
-            this.validateChildBirthCertNumber = function () {
-                debugger;
-                var self = this;
-                MVVM.blockUiPageElementWithMessage($('body'), 'Uploading your File .... Please wait');
-                // Validate childCertNo and uploadedDocument
-                var childCertNo = self.ChildsBirthCertificateNumber();
-                var uploadedDocument = self.SelectedDocument();
-
-                if (!childCertNo && !uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide both the Child's BirthCertificate Number and the uploaded document.", "red", null);
-                } else if (!childCertNo) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide the Child's BirthCertificate Number", "red", null);
-                } else if (!uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please upload the document.", "red", null);
-                } else {
-                    if (childCertNo) {
-                        self.OnSubmit();
-                    }
-                    if (uploadedDocument) {
-                        self.OnImport();
-                        return;
-
-                    }
-                }
-            };
-
-            this.validateSpouseID = function () {
-                debugger;
-                var self = this;
-                MVVM.blockUiPageElementWithMessage($('body'), 'Uploading your File .... Please wait');
-                // Validate spouceID and uploadedDocument
-                var spouceID = self.SpouseIDNumber();
-                var uploadedDocument = self.SelectedDocument();
-
-                if (!spouceID && !uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide both the Spouse  ID Number and the uploaded document.", "red", null);
-                } else if (!spouceID) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please provide the Spouse ID Number", "red", null);
-                } else if (!uploadedDocument) {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed!', "Please upload the document.", "red", null);
-                } else {
-                    if (spouceID) {
-                        self.OnSubmit();
-                    }
-                    if (uploadedDocument) {
-                        self.OnImport();
-                        return;
-
-                    }
-                }
-            };
-
             this.OnSubmit = function () {
                 debugger;
                 var self = this;
@@ -1012,6 +539,9 @@
                     debugger;
                     if (hasError) {
                         jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
+                    }
+                    else {
+                        self.onImport();
                     }
                 };
                 var functionFailed = function (hasError, message, data) {
@@ -1024,14 +554,8 @@
                 };
                 debugger;
                 var data = {
-                    IDNumber: self.NationalIDNumber(),
-                    ParentIDNumber: self.ParentIDNumber(),
-                    BirthCertificateNumber: self.BirthCertificateNumber(),
-                    ChildsBirthCertificateNumber: self.ChildsBirthCertificateNumber(),
-                    SpouseIDNumber: self.SpouseIDNumber(),
-                    GoodConductNumber: self.GoodConductNumber(),
-                    KRAPinNumber: self.KraPinNumber(),
-                    PassPortNumber: self.PassPortNumber()
+                    ImageDecName: self.productNameInput(),
+                    ImageDecprice: self.productPriceInput()
                 };
                 debugger;
                 jqueryAjaxGenerics.createJSONAjaxNonGETRequest("POST", "/DashBoard/Dashboard/SubmitUserUploadDetails", data,
@@ -1039,175 +563,19 @@
 
             }
 
-            this.checkRequiredDocuments = function () {
+            this.onImport = function () {
                 debugger;
                 var self = this;
-                this.hasError(false);
-
-
-                var functionDone = function (hasError, message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', message, "red", null);
-                    } else {
-                        debugger;
-                        self.MissingDocuments(data.Result);
-
-
-                        if (data.Result.length == 0) {
-                            self.AllfilesUploadedVisible(true);
-                            self.FilesTobeUploaded(false);
-                            return;
-                        }
-                        if (data.Result['Academic Documents'] == "Academic Documents") {
-                            self.AcademicDocumentsVisible(true);
-                        }
-                        if (data.Result['Proof of Land Ownership'] == "Proof of Land Ownership") {
-                            self.ProofofLandOwnership(true);
-                        }
-                        for (var i = 0; i < data.Result.length; i++) {
-                            if (data.Result[i] == "Academic Documents") {
-                                self.AcademicDocumentsVisible(true);
-                            }
-                            if (data.Result[i] == "National ID") {
-                                self.NationalIDVisible(true);
-                            }
-                            if (data.Result[i] == "Passport") {
-                                self.PassportVisible(true);
-                            }
-                            if (data.Result[i] == "Parents ID") {
-                                self.ParentIDVisible(true);
-                            }
-                            if (data.Result[i] == "Birth Certificate") {
-                                self.BirthCertificateVisible(true);
-                            }
-                            if (data.Result[i] == "Passport Photo") {
-                                self.PassportPhotoVisible(true);
-                            }
-                            if (data.Result[i] == "Child Birth Certificate") {
-                                self.ChildBirthCertificateVisible(true);
-                            }
-                            if (data.Result[i] == "Spouse ID") {
-                                self.SpouseIDVisible(true);
-                            }
-                            if (data.Result[i] == "Good Conduct Certificate") {
-                                self.GoodConductCertificateVisible(true);
-                            }
-                            if (data.Result[i] == "Medical Examination Certificate") {
-                                self.MedicalExaminationCertificateVisible(true);
-                            }
-                            if (data.Result[i] == "Curriculum Vitae") {
-                                self.CurriculumVitaeVisible(true);
-                            }
-                            if (data.Result[i] == "Bank Statement") {
-                                self.BankStatementVisible(true);
-                            }
-                            if (data.Result[i] == "Language Test Certificate") {
-                                self.LanguageTestCertificateVisible(true);
-                            }
-                            if (data.Result[i] == "Biometrics") {
-                                self.BiometricsVisible(true);
-                            }
-                            if (data.Result[i] == "Pay Slip") {
-                                self.PaySlipVisible(true);
-                            }
-                            if (data.Result[i] == "Recommendation Letter") {
-                                self.RecommendationLetterVisible(true);
-                            }
-                            if (data.Result[i] == "KRA Pin") {
-                                self.KRAPinVisible(true);
-                            }
-                            if (data.Result[i] == "Proof of Funds") {
-                                self.ProofofFundsVisible(true);
-                            }
-                            if (data.Result[i] == "Proof of Land Ownership") {
-                                self.ProofofLandOwnership(true);
-                            }
-                            if (data.Result[i] == "Proof of Vehicle Ownership") {
-                                self.ProofofVehicleOwnership(true);
-                            }
-                            if (data.Result[i] == "Proof of business Ownership") {
-                                self.ProofofBusinessOwnership(true);
-                            }
-                            if (data.Result[i] == "Covid -19 Vaccine Certificate") {
-                                self.CovidVaccineCertificateVisible(true);
-                            }
-                            if (data.Result[i] == "Letter from Area Chief") {
-                                self.AreaChiefLetter(true);
-                            }
-                            if (data.Result[i] == "Business Permit Certificate") {
-                                self.BusinessPermitVisible(true);
-                            }
-                            if (data.Result[i] == "Labour Export Permit") {
-                                self.LabourExportPermitVisible(true);
-                            }
-                            if (data.Result[i] == "Academic Documents") {
-                                self.AcademicDocumentsVisible(true);
-                            }
-                            if (data.Result[i] == "Age") {
-                                debugger;
-                                self.questionnaireVisibility(true);
-                            }
-                            if (data.Result[i] == "Highest level of education") {
-                                self.questionnaireVisibility(true);
-                            }
-                            if (data.Result[i] == "How did you know of us") {
-                                self.questionnaireVisibility(true);
-                            }
-                        }
-
-                    }
-                };
-                var functionFailed = function (hasError, Message, data) {
-                    debugger;
-                    if (hasError) {
-                        jqueryConfirmGenerics.showOkAlertBox('Failed!', Message, "red", null);
-                    }
-                    if (data.Message == "Please select your preferred Agent First!") {
-                        self.SelectAgentVisible(true);
-                        return;
-                    }
-                    if (data.Message == "Please Select the Country to Travel First!") {
-                        self.SelectCountryVisible(true);
-                        return;
-                    }
-                    if (data.Message == "Please Select Age First!") {
-                        self.toggleQuestionnaireVisibility(true);
-                        return;
-                    }
-                    if (data.Message == "Please Select your highest level of education First!") {
-                        self.toggleQuestionnaireVisibility(true);
-                        return;
-                    }
-                    if (data.Message == "Please Select where you found us First!") {
-                        self.toggleQuestionnaireVisibility(true);
-                        return;
-                    }
-
-                };
-                debugger;
-
-                jqueryAjaxGenerics.createJSONAjaxGETRequest("/DashBoard/Dashboard/CheckRequiredDocuments",
-
-                    functionDone, functionFailed);
-
-            }
-            this.checkRequiredDocuments();
-
-            this.OnImport = function () {
-                debugger;
-
-                var self = this;
-                MVVM.blockUiPageElementWithMessage($('body'), 'Uploading your File .... Please wait');
+                MVVM.blockUiPageElementWithMessage($('body'), 'Uploading your image .... Please wait');
                 var formData = new FormData();
-                var totalFiles = document.getElementById(self.SelectedDocument()).files.length;
-                for (var i = 0; i < totalFiles; i++) {
-                    var file = document.getElementById(self.SelectedDocument()).files[i];
-                    formData.append(self.SelectedDocument(), file, self.SelectedDocument());
-                }
+                var fileInput = document.getElementById(self.SelectedDocument());
+                var file = fileInput.files[0];
+                var name = self.productNameInput();
 
-                if (file && file.type === 'application/pdf') {
+                formData.append("name", self.productNameInput());
+                formData.append("file", file, self.productNameInput(), name);
 
+                if (file && (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg')) {
                     $.ajax({
                         type: 'POST',
                         url: '/DashBoard/Dashboard/UploadAccounts',
@@ -1216,22 +584,17 @@
                         contentType: false,
                         data: formData,
                         success: function (data) {
-
                             jqueryConfirmGenerics.showOkAlertBox('Message', data.Message, "green", null);
                             window.location.reload();
                         },
                         error: function (err) {
                             jqueryConfirmGenerics.showOkAlertBox('Failed', err.Message, "red", null);
-
                         }
-
                     });
-
                 } else {
-                    jqueryConfirmGenerics.showOkAlertBox('Failed', "Please upload a PDF file.", "red", null);
+                    jqueryConfirmGenerics.showOkAlertBox('Failed', "Please upload a .png, .jpg, .jpeg file.", "red", null);
                     return;
                 }
-
             }
 
 

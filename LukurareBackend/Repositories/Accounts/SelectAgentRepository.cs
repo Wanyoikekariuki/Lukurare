@@ -258,7 +258,6 @@ namespace LukurareBackend.Repositories
                     var additionalDetails = await context.AccountEntityTypeAdditionalDetailsValues
                         .Join(context.AccountEntityTypeAdditionalDetails, ae => ae.TypeAdditionalDetailsId, t => t.Id, (ae, t) => new { ae, t })
                         .Join(context.AccountEntities, u => u.ae.AccountEntityId, v => v.Id, (u, v) => new { u, v })
-                        .Where(t => t.v.Id == accountEntityId)
                         .Select(k => new AccountEntityTypeAdditionalDetailsValue
                         {
                             TypeAdditionalDetails = new AccountEntityTypeAdditionalDetail
@@ -267,16 +266,7 @@ namespace LukurareBackend.Repositories
                                 KeyName = k.u.t.KeyName
 
                             },
-                            Value = k.u.ae.Value,
-                            AccountEntity = new AccountEntity
-                            {
-                                Id = k.v.Id,
-                                Phone1 = k.v.Phone1,
-                                Email = k.v.Email,
-                                EntityName = k.v.EntityName,
-                                PhysicalAddress = k.v.PhysicalAddress,
-                                IdentificationDocumentNumber = k.v.IdentificationDocumentNumber
-                            },
+                            Value = k.u.ae.Value
                         })
                         .ToListAsync();
 

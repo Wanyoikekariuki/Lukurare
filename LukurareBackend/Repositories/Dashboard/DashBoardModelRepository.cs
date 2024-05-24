@@ -97,6 +97,7 @@ namespace LukurareBackend.Repositories.DashBoard
         public async Task<ExecutionResult<AccountEntity>> UploadAccounts(
            IFormFileCollection files,
            string path
+
        )
         {
             var executionResult = new ExecutionResult<AccountEntity>(true);
@@ -133,6 +134,7 @@ namespace LukurareBackend.Repositories.DashBoard
                     string sFiles_uploaded = "";
 
                     string uploaded_Filename = "";
+                    string nameUpload = $"{uploaded_Filename}";
                     string new_Filename_on_Server = "";
 
                     foreach (var uploaded_file in uploaded_files)
@@ -150,7 +152,7 @@ namespace LukurareBackend.Repositories.DashBoard
 
                         //< Filename >
                         uploaded_Filename = uploaded_file.FileName;
-                        new_Filename_on_Server = $"{path_for_Uploaded_Files}{accountEntity.EntityUserName}{uploaded_Filename}{formattedDate}.pdf";                                
+                        new_Filename_on_Server = $"{path_for_Uploaded_Files}{accountEntity.EntityUserName}_{uploaded_Filename}.png";                                
 
                         //</ Filename >
 
@@ -162,30 +164,30 @@ namespace LukurareBackend.Repositories.DashBoard
                         {
                             await uploaded_file.CopyToAsync(stream);
 
-                            var documentName = $"{uploaded_Filename}";
+                            var documentName = "ImagePhoto";
                             var required = await context.IdentificationDocumentTypes
                                 .Join(context.AccountEntityTypeRequiredDocuments, r => r.Id, x => x.IdentificationDocumentTypeId, (r, x) => new { r, x })
                                 .Where(ae => ae.r.DocumentName == documentName && ae.x.AccountEntityTypeId == accountEntity.AccountEntityTypeId)
                                 .FirstOrDefaultAsync();
 
-                            if (required == null)
-                            {
-                                executionResult.Message = "Documents for this user type not defined";
-                                executionResult.IsOkay = true;
-                                return executionResult;
-                            }
+                            //if (required == null)
+                            //{
+                            //    executionResult.Message = "Documents for this user type not defined";
+                            //    executionResult.IsOkay = true;
+                            //    return executionResult;
+                            //}
                             var accountEntitySecondaryIdentificationDocuments = new AccountEntitySecondaryIdentificationDocument
                             {
                                 AccountEntityId = accountEntity.Id,
                                 RequiredDocumentsId = required.x.Id,
-                                Path = $"/UploadedFiles/{accountEntity.EntityUserName}{uploaded_Filename}{formattedDate}.pdf",
+                                Path = $"/UploadedFiles/{accountEntity.EntityUserName}_{uploaded_Filename}.png",
                                 Validated = false,
                                 Active = true
                             };
                             context.AccountEntitySecondaryIdentificationDocuments.Add(accountEntitySecondaryIdentificationDocuments);
                             context.SaveChanges();
 
-                            executionResult.Message = "The file has uploaded  successfully and The Detail have been saved succefully"; // to    /UploadedFiles/{uploaded_Filename}
+                            executionResult.Message = "The Image has uploaded  successfully and The Detail have been saved succefully"; // to    /UploadedFiles/{uploaded_Filename}
 
 
                         }
@@ -322,137 +324,29 @@ namespace LukurareBackend.Repositories.DashBoard
                     var KeyId = 0;
                     string value = null;
 
-                    if (model.IDNumber != null)
+                    if (model.ImageDecName != null && model.ImageDecprice != null)
                     {
-                        var IDNumber = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.NationaIDNumber);
-                        KeyId = IDNumber.Id;
-                        value = model.IDNumber;
-                    }
-                    if (model.ParentIDNumber != null)
-                    {
-                        var parentIDNo = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.ParentIDNUmber);
-                        KeyId = parentIDNo.Id;
-                        value = model.ParentIDNumber;
-                    }
-                    if (model.SpouseIDNumber != null)
-                    {
-                        var spouseIdNo = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.SpouceIDNumber);
-                        KeyId = spouseIdNo.Id;
-                        value = model.SpouseIDNumber;
-                    }
-                    if (model.KRAPinNumber != null)
-                    {
-                        var KraPinNo = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.KraPinNumber);
-                        KeyId = KraPinNo.Id;
-                        value = model.KRAPinNumber;
-                    }
-                    if (model.GoodConductNumber != null)
-                    {
-                        var GoodConductNo = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.GoodConductNumber);
-                        KeyId = GoodConductNo.Id;
-                        value = model.GoodConductNumber;
-                    }
-                    if (model.BirthCertificateNumber != null)
-                    {
-                        var BirthCertNo = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.BirthCertificateNumber);
-                        KeyId = BirthCertNo.Id;
-                        value = model.BirthCertificateNumber;
-                    }
-                    if (model.ChildsBirthCertificateNumber != null)
-                    {
-                        var ChildsBirthCertNo = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.ChildBirthCertificateNumber);
-                        KeyId = ChildsBirthCertNo.Id;
-                        value = model.ChildsBirthCertificateNumber;
-                    }
-                    if (model.PassPortNumber != null)
-                    {
-                        var PassPortNo = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.PassportNumber);
-                        KeyId = PassPortNo.Id;
-                        value = model.PassPortNumber;
-                    }
-                    if (model.CountryOrigin != null && model.CountryCitizenship != null && model.CountryTravelling != null && model.CurrentCountry != null)
-                    {
-                        var CountryOfOrigin = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.CountryOfOrigin);
-                        var addCountryOfOrigin = new AccountEntityTypeAdditionalDetailsValue
+                        var ImageDecName = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.ImageDataDescName);
+                        var addImageDecName = new AccountEntityTypeAdditionalDetailsValue
                         {
-                            TypeAdditionalDetailsId = CountryOfOrigin.Id,
+                            TypeAdditionalDetailsId = ImageDecName.Id,
                             AccountEntityId = accountEntity.Id,
-                            Value = model.CountryOrigin
+                            Value = model.ImageDecName
                         };
-                        context.AccountEntityTypeAdditionalDetailsValues.Add(addCountryOfOrigin);
-                        var CountryCitizenship = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.Citizenship);
-                        var addCountryCitizenship = new AccountEntityTypeAdditionalDetailsValue
+                        context.AccountEntityTypeAdditionalDetailsValues.Add(addImageDecName);
+                        var ImageDecprice = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.ImageDataDescPrice);
+                        var addImageDecprice = new AccountEntityTypeAdditionalDetailsValue
                         {
-                            TypeAdditionalDetailsId = CountryCitizenship.Id,
+                            TypeAdditionalDetailsId = ImageDecprice.Id,
                             AccountEntityId = accountEntity.Id,
-                            Value = model.CountryCitizenship
+                            Value = model.ImageDecprice
                         };
-                        context.AccountEntityTypeAdditionalDetailsValues.Add(addCountryCitizenship);
-                        var CountryTravelling = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.CountryToTravel);
-                        var AddCountryTravelling = new AccountEntityTypeAdditionalDetailsValue
-                        {
-                            TypeAdditionalDetailsId = CountryTravelling.Id,
-                            AccountEntityId = accountEntity.Id,
-                            Value = model.CountryTravelling
-                        };
-                        context.AccountEntityTypeAdditionalDetailsValues.Add(AddCountryTravelling);
-                        var CurrentCountry = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.CurrentCountry);
-                        var AddCurrentCountry = new AccountEntityTypeAdditionalDetailsValue
-                        {
-                            TypeAdditionalDetailsId = CurrentCountry.Id,
-                            AccountEntityId = accountEntity.Id,
-                            Value = model.CurrentCountry
-                        };
-                        context.AccountEntityTypeAdditionalDetailsValues.Add(AddCurrentCountry);
+                        context.AccountEntityTypeAdditionalDetailsValues.Add(addImageDecprice);                       
 
                         context.SaveChanges();
                         executionResult.Message = "The Detail have been saved succefully";
                         return executionResult;
-                    }
-                    if (model.Age != null && model.HighestLevelOfEducation != null && model.HowDidYouKnowOfUs != null)
-                    {
-                        var Age = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.Age);
-                        var addAge = new AccountEntityTypeAdditionalDetailsValue
-                        {
-                            TypeAdditionalDetailsId = Age.Id,
-                            AccountEntityId = accountEntity.Id,
-                            Value = model.Age
-                        };
-                        context.AccountEntityTypeAdditionalDetailsValues.Add(addAge);
-
-                        var HighestlevelOfEducation = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.HighestLevelOfEducation);
-                        //var HighestLevelOfEducation = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.HighestLevelOfEducation);
-                        var addHighestLevelOfEducation = new AccountEntityTypeAdditionalDetailsValue
-                        {
-                            TypeAdditionalDetailsId = HighestlevelOfEducation.Id,
-                            AccountEntityId = accountEntity.Id,
-                            Value = model.HighestLevelOfEducation
-                        };
-                        context.AccountEntityTypeAdditionalDetailsValues.Add(addHighestLevelOfEducation);
-
-                        var HowDidYouKnowOfUs = context.AccountEntityTypeAdditionalDetails.FirstOrDefault(y => y.KeyName == DefaultConfiguration.AccountEntityTypeAditionalDetails.HowDidYouKnowOfUs);
-                        var addHowDidYouKnowOfUs = new AccountEntityTypeAdditionalDetailsValue
-                        {
-                            TypeAdditionalDetailsId = HowDidYouKnowOfUs.Id,
-                            AccountEntityId = accountEntity.Id,
-                            Value = model.HowDidYouKnowOfUs
-                        };
-                        context.AccountEntityTypeAdditionalDetailsValues.Add(addHowDidYouKnowOfUs);
-
-                        context.SaveChanges();
-                        executionResult.Message = "Details have been saved succefully";
-                        return executionResult;
-
-                    }
-                     
-                    var additionalDetails = new AccountEntityTypeAdditionalDetailsValue
-                    {
-                        TypeAdditionalDetailsId = KeyId,
-                        AccountEntityId = accountEntity.Id,
-                        Value = value
-                    };
-                    context.AccountEntityTypeAdditionalDetailsValues.Add(additionalDetails);
-                    context.SaveChanges();
+                    }                     
                     executionResult.Message = "The Detail have been saved succefully";
                 }
             }
